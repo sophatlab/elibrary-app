@@ -33,12 +33,12 @@
 
 
 /*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+    The default border color has changed to `currentColor` in Tailwind CSS v4,
+    so we've added these compatibility styles to make sure everything still
+    looks the same as it did with Tailwind CSS v3.
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
+    If we ever want to remove these styles, we need to add an explicit border
+    color utility to any element that depends on these defaults.
 */
 @layer base {
 
@@ -96,15 +96,15 @@
     }
 
     .logo {
-        @apply w-72 shrink-0 border-r border-dashed py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
+        @apply w-fit  @xs:w-72 shrink-0 border-r border-dashed py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
     }
 
     .sidebar {
-        @apply h-[calc(100vh_-57px)] drop-shadow-2xl max-md:hidden w-72 shrink-0 border-r border-dashed  border-border;
+        @apply h-[calc(100vh_-57px)] drop-shadow-2xl max-md:hidden @max-md:w-0 w-72 shrink-0 border-r border-dashed border-border;
     }
 
-    .container {
-        @apply max-w-7xl mx-auto px-4;
+    .main {
+        @apply w-full max-w-7xl md:w-[calc(100%_-18rem)] mx-auto px-4;
     }
 
     .hero {
