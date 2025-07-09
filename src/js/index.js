@@ -8,7 +8,7 @@ const renderRecommendedBooks = async () => {
     const recommendedBooksContainer = document.getElementById('recommended-books');
     // set loading state
     recommendedBooksContainer.innerHTML = loadingCard({ length: 10 });
-    const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))
+    const books = await fetch(new URL(`/api/v1/recommendations/trending`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
         .catch(error => {
@@ -18,7 +18,7 @@ const renderRecommendedBooks = async () => {
 
     recommendedBooksContainer.innerHTML = Array.from(books).map(book => `
         <li class="shrink-0 w-32 @sm:w-44 overflow-hidden rounded">
-            <img src="${new URL(book.image, APP_API_URL)}" alt="${book.title}" class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]">
+            <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=250`, APP_API_URL)}" alt="${book.title}" class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]">
             <div>
                 <h3 class="font-semibold">${book.title}</h3>
                 <p class="text-xs">${book.author}</p>
@@ -53,6 +53,8 @@ const renderAuthors = () => {
 
 const renderNewReleaseBooks = async () => {
 
+    const newReleaseBooksContainer = document.getElementById('new-release');
+    newReleaseBooksContainer.innerHTML = loadingCard({ length: 10 });
     const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
@@ -60,11 +62,9 @@ const renderNewReleaseBooks = async () => {
             console.error('Error fetching books:', error);
             return [];
         });
-
-    const newReleaseBooksContainer = document.getElementById('new-release');
     newReleaseBooksContainer.innerHTML = books.map(book => `
         <li class="shrink-0 w-32 @sm:w-44 overflow-hidden rounded">
-            <img src="${new URL(book.image, APP_API_URL)}" alt="${book.title}" class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]">
+            <img src="${new URL(`${book.image}?q=60&w=250`, APP_API_URL)}" alt="${book.title}" class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]">
             <div>
                 <h3 class="font-semibold">${book.title}</h3>
                 <p class="text-xs">${book.author}</p>
