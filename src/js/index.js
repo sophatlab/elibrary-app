@@ -1,76 +1,33 @@
 import { initializeHero } from '../components/hero.js';
 import { initializeLayout } from '../components/layout.js';
+import { loadingCard } from '../components/loading.js';
+import { APP_API_URL } from '../libs/constant.js';
 
-// const books = await fetch('https://api.sophat.top/api/v1/ebooks')
-//     .then(response => response.json())
-//     .catch(error => {
-//         console.error('Error fetching books:', error);
-//         return [];
-//     });
+const renderRecommendedBooks = async () => {
 
-// console.log(books);
-    
-
-const recommendedBooks = [
-    {
-        id: 1,
-        title: 'Design Book',
-        authors: [
-            'PPhat Dev',
-            "Behance",
-        ],
-        image: 'https://mir-s3-cdn-cf.behance.net/projects/808/a4ef7f161215951.Y3JvcCwxNjE2LDEyNjQsMCww.png',
-    },
-    {
-        id: 1,
-        title: 'Design Book',
-        authors: [
-            'PPhat Dev',
-            "Behance",
-        ],
-        image: 'https://mir-s3-cdn-cf.behance.net/projects/808/a4ef7f161215951.Y3JvcCwxNjE2LDEyNjQsMCww.png',
-    },
-    {
-        id: 1,
-        title: 'Design Book',
-        authors: [
-            'PPhat Dev',
-            "Behance",
-        ],
-        image: 'https://mir-s3-cdn-cf.behance.net/projects/808/a4ef7f161215951.Y3JvcCwxNjE2LDEyNjQsMCww.png',
-    },
-    {
-        id: 1,
-        title: 'Design Book',
-        authors: [
-            'PPhat Dev',
-            "Behance",
-        ],
-        image: 'https://mir-s3-cdn-cf.behance.net/projects/808/a4ef7f161215951.Y3JvcCwxNjE2LDEyNjQsMCww.png',
-    },
-    {
-        id: 1,
-        title: 'Design Book',
-        authors: [
-            'PPhat Dev',
-            "Behance",
-        ],
-        image: 'https://mir-s3-cdn-cf.behance.net/projects/808/a4ef7f161215951.Y3JvcCwxNjE2LDEyNjQsMCww.png',
-    },
-]
-
-const renderRecommendedBooks = () => {
     const recommendedBooksContainer = document.getElementById('recommended-books');
-    recommendedBooksContainer.innerHTML = recommendedBooks.map(book => `
-        <li class="bg-card border overflow-hidden border-border/5 rounded-xl shadow hover:shadow-lg transition-shadow">
-            <img src="${book.image}" alt="${book.title}" class="w-full object-cover aspect-[3/4]">
-            <div class="p-4">
+    // set loading state
+    recommendedBooksContainer.innerHTML = loadingCard({ length: 10 });
+
+    const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))
+        .then(response => response.json())
+        .then(data => data.result)
+        .catch(error => {
+            console.error('Error fetching books:', error);
+            return [];
+        });
+
+    recommendedBooksContainer.innerHTML = Array.from(books).map(book => `
+        <li class="bg-card border shrink-0 w-32 @sm:w-44 overflow-hidden border-border/5 rounded">
+            <img src="${new URL(book.image, APP_API_URL)}" alt="${book.title}" class="max-sm:h-36 w-full object-cover aspect-[3/4]">
+            <div>
                 <h3 class="font-semibold">${book.title}</h3>
-                <p class="text-xs">${book.authors.map(author => author).join(' ° ')}</p>
+                <p class="text-xs">${book.author}</p>
             </div>
-        </li>
-    `).join('');
+        </li>`
+    ).join('');
 };
+
 
 const authors = [
     {
