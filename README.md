@@ -33,7 +33,7 @@ elibrary-app/
 │   │   ├── catalog.js
 │   │   ├── book-details.js
 │   │   └── admin.js
-│   ├── templates/          # HTML templates
+│   ├── pages/          # HTML templates
 │   │   ├── index.html
 │   │   ├── catalog.html
 │   │   ├── book.html
