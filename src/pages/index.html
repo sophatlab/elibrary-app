@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <meta name="description" content="Welcome to eLibrary - Your digital library for discovering and reading books online">
+</head>
+
+<body>
+
+    <header class="header">
+        <!-- Handle by JS -->
+    </header>
+
+    <div class="flex mx-auto items-start max-h-[calc(100vh_-57px)] w-full overflow-y-auto">
+
+        <aside class="sidebar sticky top-0">
+            <!-- Handle by JS -->
+        </aside>
+
+        <main class="w-full p-4 container">
+
+            <!-- Hero Section -->
+            <section id="hero" class="hero"></section>
+
+            <section id="recommended-section">
+                <h2 class="mt-10 mb-5 font-sans text-lg font-medium">Recommended books</h2>
+                <ul id="recommended-books" role="list" class="flex items-center justify-start gap-5 p-1 overflow-x-auto"></ul>
+            </section>
+
+            <section id="authors-section">
+                <h2 class="mt-10 mb-5 font-sans text-lg font-medium">Authors you may like</h2>
+                <ul id="authors" role="list" class="flex items-center justify-start gap-5 p-1 overflow-x-auto"></ul>
+            </section>
+
+            <section id="new-release-section">
+                <h2 class="mt-10 mb-5 text-lg font-sans font-medium">New book releases</h2>
+                <ul id="new-release" role="list" class="flex items-center justify-start gap-5 p-1 overflow-x-auto">
+                    <li>
+                        <a href="">
+                            <img src="https://picsum.photos/200/300?random=1" alt="New Release 1" class="w-40 h-60 object-cover rounded-lg shadow-md">
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">New Release 1</h3>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Why Choose eLibrary?</h3>
+                        <p class="text-lg text-gray-600">Everything you need for your digital reading experience</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div
+                                class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Vast Collection</h4>
+                            <p class="text-gray-600">Access thousands of books across all genres and topics</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Easy Search</h4>
+                            <p class="text-gray-600">Find your favorite books quickly with our powerful search</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Easy Management</h4>
+                            <p class="text-gray-600">Manage your library with intuitive admin tools</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+    <!-- <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">eLibrary</h3>
+                <p class="text-gray-400 mb-4">Your digital gateway to knowledge</p>
+                <p class="text-gray-500">&copy; 2025 eLibrary. All rights reserved.</p>
+            </div>
+        </div>
+    </footer> -->
+</body>
+
+</html>

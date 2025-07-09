@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.cache/
+.parcel-cache/
+.DS_Store
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+coverage/
+.nyc_output/
+.vscode/
+*.swp
+*.swo
+*~
