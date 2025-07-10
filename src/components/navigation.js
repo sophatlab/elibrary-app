@@ -1,8 +1,12 @@
+import { Search } from './search.js';
+
 export class Navigation {
     constructor() {
         this.navigation = document.querySelector('.header');
+        this.search = new Search();
         this.render();
         this.themeSwitch();
+        this.search.init();
     }
 
     logo() {
@@ -22,22 +26,6 @@ export class Navigation {
                 <span class="text-2xl">eBooks</span>
             </div>
         `)
-    }
-
-    search() {
-        const searchButton = document.createElement('button');
-        searchButton.classList = "w-full cursor-pointer inline-flex text-xs gap-1 py-1 px-3 items-center bg-foreground/5 border border-border rounded-4xl";
-        searchButton.setAttribute('type', 'button');
-        searchButton.setAttribute('role', 'search');
-        searchButton.innerHTML = (`
-            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                <path d="M21 21l-6 -6" />
-            </svg>
-            Ctrl + K
-        `);
-
-        return (` <span class="sr-only">Search</span> ${searchButton.outerHTML} `)
     }
 
     theme() {
@@ -135,7 +123,7 @@ export class Navigation {
             <nav class="sm:px-6 lg:px-8">
                 <ul class="flex items-center justify-end gap-4" role="menubar">
                     <li role="menuitem">
-                        ${this.search()}
+                        ${this.search.createSearchButton()}
                     </li>
                     <li role="menuitem">
                         ${this.theme()}
