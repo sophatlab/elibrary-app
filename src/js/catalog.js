@@ -192,7 +192,7 @@ const initializeBooks = async (page = 1) => {
 
         // Render books
         newReleaseBooksContainer.innerHTML = books.map(book => `
-            <li class="shrink-0 w-full sm:w-[11.85rem] overflow-hidden">
+            <li class="shrink-0 w-full relative sm:w-[11.85rem] overflow-hidden">
                 <div class="border border-border/10 rounded-lg w-full aspect-[3/4] bg-foreground/10 relative">
                     <img
                         src="${new URL(`${book.image}?q=10&w=50`, APP_API_URL)}"
@@ -213,6 +213,7 @@ const initializeBooks = async (page = 1) => {
                     <h3 class="font-semibold">${book.title}</h3>
                     <p class="text-xs">${book.author}</p>
                 </div>
+                <a href="/book?id=${book.id}" class="absolute inset-0"></a>
             </li>
         `).join('');
 

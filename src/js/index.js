@@ -17,7 +17,7 @@ const renderRecommendedBooks = async () => {
         });
 
     recommendedBooksContainer.innerHTML = Array.from(books).map((book, index) => `
-        <li class="shrink-0 w-32 @sm:w-44 overflow-hidden rounded">
+        <li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
             <img
                 src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=250`, APP_API_URL)}"
                 srcset="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=250`, APP_API_URL)} 250w,
@@ -36,6 +36,7 @@ const renderRecommendedBooks = async () => {
                 <h3 class="font-semibold">${book.title}</h3>
                 <p class="text-xs">${book.author}</p>
             </div>
+            <a href="/book?id=${book.id}" class="absolute inset-0"></a>
         </li>`
     ).join('');
 };
@@ -76,7 +77,7 @@ const renderNewReleaseBooks = async () => {
             return [];
         });
     newReleaseBooksContainer.innerHTML = books.map(book => `
-        <li class="shrink-0 w-32 @sm:w-44 overflow-hidden rounded">
+        <li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
             <img
                 src="${new URL(`${book.image}?q=60&w=250`, APP_API_URL)}"
                 alt="${book.title}"
@@ -91,6 +92,7 @@ const renderNewReleaseBooks = async () => {
                 <h3 class="font-semibold">${book.title}</h3>
                 <p class="text-xs">${book.author}</p>
             </div>
+            <a href="/book?id=${book.id}" class="absolute inset-0"></a>
         </li>
     `).join('');
 };
