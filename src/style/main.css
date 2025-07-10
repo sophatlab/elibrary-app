@@ -29,6 +29,9 @@
 
     --color-border: hsl(var(--border));
     --color-ring: hsl(var(--primary));
+
+    /* Breakpoints */
+    --breakpoint-xs: 475px;
 }
 
 
@@ -80,7 +83,7 @@
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
 
-        --border: 0 0% 90%;
+        --border: 0 0% 10%;
         --ring: 240 10% 3.9%;
     }
 
@@ -96,11 +99,11 @@
 @layer components {
 
     .header {
-        @apply border-b border-dashed mx-auto flex items-center justify-between;
+        @apply border-b border-dashed border-border mx-auto flex items-center justify-between;
     }
 
     .logo {
-        @apply w-fit @xs:w-72 shrink-0 border-r border-dashed py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
+        @apply w-fit xs:w-72 shrink-0 border-r border-dashed border-border py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
     }
 
     .sidebar {
