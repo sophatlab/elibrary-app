@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <meta name="description" content="View detailed information about books in our library">
+    <meta name="description" content="Browse our extensive catalog of books - fiction, non-fiction, academic, and more">
 </head>
-<body class="bg-gray-50">
+<body>
 
     <header class="header">
         <!-- Handle by JS -->
@@ -18,106 +18,19 @@
             <!-- Handle by JS -->
         </aside>
 
-        <main class="w-full p-4 container">
-<!-- Breadcrumb -->
-        <nav class="flex mb-8" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="text-gray-500 hover:text-blue-600">Home</a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <a href="/catalog.html" class="ml-1 text-gray-500 hover:text-blue-600 md:ml-2">Catalog</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="ml-1 text-gray-900 md:ml-2">Book Details</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
+        <main class="w-full p-4 main">
+            <!-- Book Detil -->
+            <section class="my-5" id="book-detail">
 
-        <!-- Book Details -->
-        <div id="book-details" class="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="md:flex">
-                <div class="md:w-1/3">
-                    <img id="book-cover" src="" alt="Book cover" class="w-full h-96 md:h-full object-cover">
-                </div>
-                <div class="md:w-2/3 p-8">
-                    <div class="flex items-center mb-4">
-                        <span id="book-genre" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"></span>
-                        <span id="book-status" class="ml-2 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"></span>
-                    </div>
-                    <h1 id="book-title" class="text-3xl font-bold text-gray-900 mb-2"></h1>
-                    <p id="book-author" class="text-xl text-gray-600 mb-4"></p>
-                    <div class="flex items-center mb-6">
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span id="book-rating" class="ml-1 text-gray-600"></span>
-                        </div>
-                        <span id="book-pages" class="ml-4 text-gray-600"></span>
-                    </div>
-                    <div class="mb-6">
-                        <h2 class="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-                        <p id="book-description" class="text-gray-600 leading-relaxed"></p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div>
-                            <h3 class="font-semibold text-gray-900 mb-1">ISBN</h3>
-                            <p id="book-isbn" class="text-gray-600"></p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 mb-1">Publication Date</h3>
-                            <p id="book-publish-date" class="text-gray-600"></p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 mb-1">Publisher</h3>
-                            <p id="book-publisher" class="text-gray-600"></p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 mb-1">Language</h3>
-                            <p id="book-language" class="text-gray-600"></p>
-                        </div>
-                    </div>
-                    <div class="flex space-x-3">
-                        <button id="read-book-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-                            Read Now
-                        </button>
-                        <button id="add-to-favorites-btn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition duration-200">
-                            Add to Favorites
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Related Books -->
-        <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Books</h2>
-            <div id="related-books" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Related books will be loaded here -->
-            </div>
-        </div>
+
+            <!-- Related Books -->
+            <section class="my-5">
+                <ul id="related-ebooks" role="list" class="max-sm:grid max-sm:grid-cols-2 flex flex-wrap items-center justify-evenly gap-5 p-1 overflow-x-auto scrollbar-none"></ul>
+                <div id="pagination-container" class="mt-8"></div>
+            </section>
         </main>
     </div>
-
-    <footer class="bg-gray-800 text-white py-12 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h3 class="text-2xl font-bold mb-4">eLibrary</h3>
-                <p class="text-gray-400 mb-4">Your digital gateway to knowledge</p>
-                <p class="text-gray-500">&copy; 2025 eLibrary. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
