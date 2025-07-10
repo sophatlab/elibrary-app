@@ -9,7 +9,7 @@ export class Search {
 
     createSearchButton() {
         const searchButton = document.createElement('button');
-        searchButton.classList = "w-full cursor-pointer inline-flex text-xs gap-1 py-1 px-3 items-center bg-foreground/5 border border-border rounded-4xl";
+        searchButton.classList = "w-full cursor-pointer inline-flex text-xs gap-1 py-1.5 px-3 items-center bg-foreground/5 border border-border rounded-4xl";
         searchButton.setAttribute('type', 'button');
         searchButton.setAttribute('role', 'search');
         searchButton.setAttribute('id', 'search-button');
@@ -29,7 +29,7 @@ export class Search {
         dialog.id = 'search-dialog';
         dialog.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-300 ease-in-out opacity-0';
         dialog.innerHTML = `
-            <div class="bg-background border border-border rounded-lg shadow-lg w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 ease-in-out scale-95 translate-y-4">
+            <div class="search-dialog bg-background/80 border border-border rounded-xl shadow-lg w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 ease-in-out scale-95 translate-y-4">
                 <div class="flex items-center border-b border-border px-4">
                     <svg class="size-4 mr-3 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
@@ -42,8 +42,8 @@ export class Search {
                         class="flex-1 bg-transparent border-0 py-4 text-sm outline-none placeholder:text-muted-foreground"
                         autocomplete="off"
                     />
-                    <button id="close-search" class="p-1 hover:bg-foreground/5 rounded transition-colors duration-200">
-                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="close-search" class="p-1 cursor-pointer hover:bg-foreground/5 rounded transition-colors duration-200">
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6l-12 12" />
                             <path d="M6 6l12 12" />
                         </svg>
@@ -77,7 +77,7 @@ export class Search {
             const searchInput = document.getElementById('search-input');
             const closeButton = document.getElementById('close-search');
             const searchResults = document.getElementById('search-results');
-            const dialogContent = dialog.querySelector('div.bg-background');
+            const dialogContent = dialog.querySelector('div.search-dialog');
 
             // Open dialog with animation
             const openDialog = () => {
@@ -87,7 +87,7 @@ export class Search {
 
                 dialog.classList.remove('hidden');
                 dialog.classList.add('flex');
-                
+
                 // Trigger animation
                 requestAnimationFrame(() => {
                     dialog.classList.remove('opacity-0');
@@ -114,10 +114,10 @@ export class Search {
                 setTimeout(() => {
                     dialog.classList.add('hidden');
                     dialog.classList.remove('flex');
-                    
+
                     // Restore original body overflow
                     document.body.style.overflow = this.originalBodyOverflow || '';
-                    
+
                     // Reset form
                     searchInput.value = '';
                     searchResults.innerHTML = '<div class="text-sm text-muted-foreground text-center py-8">Start typing to search for books...</div>';
@@ -237,14 +237,14 @@ export class Search {
                 <div class="flex items-center gap-3 p-3 hover:bg-foreground/5 rounded cursor-pointer border-b border-border last:border-b-0" data-book-id="${book.id || ''}">
                     <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded flex items-center justify-center overflow-hidden">
                         ${book.image
-                            ? `<img src="${APP_API_URL}${book.image}?q=60&w=100" alt="${book.title}" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    ? `<img src="${APP_API_URL}${book.image}?q=60&w=100" alt="${book.title}" class="w-full h-full object-cover rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                                 <svg class="size-5 text-primary hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                                 </svg>`
-                            : `<svg class="size-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    : `<svg class="size-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                                 </svg>`
-                        }
+                }
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="font-medium text-sm truncate">${book.title || 'Untitled'}</div>
