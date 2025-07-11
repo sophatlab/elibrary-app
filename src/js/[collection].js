@@ -1,4 +1,6 @@
+import { Cards } from '../components/cards.js';
 import { initializeLayout } from '../components/layout.js';
+import { initializePagination } from '../components/pagination.js';
 import { APP_API_URL } from '../libs/constant.js';
 
 const bookInitial = async () => {
@@ -22,233 +24,190 @@ const bookInitial = async () => {
             return {};
         });
 
-    const bookDetail = document.getElementById('book-detail');
+    // const bookDetail = document.getElementById('book-detail');
 
-    if (book && book.id) {
-        bookDetail.innerHTML = `
-            <div class="container mx-auto px-4 py-8 max-w-7xl">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Book Cover and Actions -->
-                    <div class="lg:col-span-1">
-                        <div class="sticky top-8">
-                            <!-- Book Cover -->
-                            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                                <div class="aspect-[3/4] bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4">
-                                    <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=512`, APP_API_URL)}"
-                                        alt="${book.title || 'Book cover'}"
-                                        class="w-full rounded-lg object-cover transition-opacity duration-300 opacity-0"
-                                        onload="this.classList.remove('opacity-0')">
-                                </div>
-                                <!-- Price and Rating -->
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="text-3xl font-bold ${book.price && parseFloat(book.price) > 0 ? 'text-green-600' : 'text-green-600'}">
-                                        ${book.price && parseFloat(book.price) > 0 ? `$${book.price}` : 'Free'}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="flex text-yellow-400">
-                                            ${generateStars(book.rating || 0)}
-                                        </div>
-                                        <span class="ml-2 text-sm text-gray-600">${book.rating || 0}</span>
-                                    </div>
-                                </div>
+    // if (book && book.id) {
+    //     bookDetail.innerHTML = `
 
-                                <!-- Action Buttons -->
-                                <div class="space-y-3">
-                                    <button onclick="downloadBook('${book.id}')" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
-                                        <i class="fas fa-download mr-2"></i>Download
-                                    </button>
-                                    <button onclick="addToFavorites('${book.id}')" class="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition duration-200">
-                                        <i class="fas fa-heart mr-2"></i>Add to Wishlist
-                                    </button>
-                                    ${book.price && parseFloat(book.price) > 0 ?
-                `<button onclick="purchaseBook('${book.id}')" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
-                                            <i class="fas fa-shopping-cart mr-2"></i>Buy Now
-                                        </button>` :
-                `<button class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
-                                            <i class="fas fa-download mr-2"></i>Download Sample
-                                        </button>`
+    //     `;
+    // } else {
+    //     bookDetail.innerHTML = `
+    //         <div class="container mx-auto px-4 py-8 max-w-4xl">
+    //             <div class="flex justify-center">
+    //                 <div class="bg-white rounded-lg shadow-md p-8 text-center max-w-md">
+    //                     <div class="text-red-500 mb-4">
+    //                         <i class="fas fa-exclamation-triangle text-4xl"></i>
+    //                     </div>
+    //                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Book Not Found</h2>
+    //                     <p class="text-gray-600 mb-6">The requested book could not be found or loaded. Please check the URL and try again.</p>
+    //                     <a href="/" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+    //                         Go Back to Library
+    //                     </a>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `;
+    // }
+}
+
+// Set books per page for related books
+const getRelatedBooksPerPage = () => {
+    if (window.innerWidth < 640) { // mobile
+        return 6;
+    } else if (window.innerWidth < 1024) { // tablet
+        return 8;
+    } else { // desktop
+        return 10;
+    }
+};
+
+let RELATED_BOOKS_PER_PAGE = getRelatedBooksPerPage();
+
+// Update books per page when window resizes
+window.addEventListener('resize', () => {
+    const newBooksPerPage = getRelatedBooksPerPage();
+    if (newBooksPerPage !== RELATED_BOOKS_PER_PAGE) {
+        RELATED_BOOKS_PER_PAGE = newBooksPerPage;
+        initializeRelatedBooks(1); // Reset to first page
+    }
+});
+
+// Global variables for related books pagination
+let currentRelatedPage = 1;
+let currentRelatedRequest = null;
+let isRelatedLoading = false;
+
+const initializeRelatedBooks = async (page = 1) => {
+    // Prevent multiple simultaneous requests
+    if (isRelatedLoading && currentRelatedPage === page) {
+        return;
+    }
+
+    // Cancel previous request if it exists
+    if (currentRelatedRequest) {
+        currentRelatedRequest.abort();
+        currentRelatedRequest = null;
+    }
+
+    // Set loading state
+    isRelatedLoading = true;
+    currentRelatedPage = page;
+
+    const id = new URLSearchParams(window.location.search).get('id');
+    const relatedBooksContainer = document.getElementById('related-ebooks');
+    const paginationContainer = document.getElementById('pagination-container');
+
+    // Show loading state
+    relatedBooksContainer.innerHTML = Cards.skeleton({
+        length: RELATED_BOOKS_PER_PAGE,
+        className: "shrink-0 w-full aspect-[3/4] sm:w-44 overflow-hidden"
+    });
+    paginationContainer.innerHTML = '';
+
+    // Create URL with pagination parameters
+    const url = new URL(`/api/v1/ebooks/related/${id}`, APP_API_URL);
+    url.searchParams.append('page', page.toString());
+    url.searchParams.append('limit', RELATED_BOOKS_PER_PAGE.toString());
+
+    // Create AbortController for this request
+    const abortController = new AbortController();
+    currentRelatedRequest = abortController;
+
+    try {
+        const response = await fetch(url, {
+            signal: abortController.signal
+        });
+
+        // Check if request was aborted
+        if (abortController.signal.aborted) {
+            return;
+        }
+
+        const data = await response.json();
+        const books = data.result || [];
+        const totalBooks = data.total || books.length;
+        const totalPages = Math.ceil(totalBooks / RELATED_BOOKS_PER_PAGE);
+
+        if (books.length > 0) {
+            // Render books
+            relatedBooksContainer.innerHTML = books.map(Cards.relatedBook).join('');
+
+            // Initialize pagination if there are multiple pages
+            if (totalPages > 1) {
+                initializePagination(paginationContainer, page, totalPages, (newPage) => {
+                    handleRelatedPageChange(newPage);
+                });
             }
-                                </div>
-                            </div>
-
-                            <!-- Book Stats -->
-                            <div class="bg-white rounded-lg shadow-md p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Book Statistics</h3>
-                                <div class="space-y-3">
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">Downloads</span>
-                                        <span class="font-semibold">${book.download_count || 0}</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">Pages</span>
-                                        <span class="font-semibold">${book.page_count || 'Unknown'}</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">File Size</span>
-                                        <span class="font-semibold">${book.file_size_mb || 'Unknown'} MB</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">Format</span>
-                                        <span class="font-semibold uppercase">${book.file_format || 'Unknown'}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Book Information -->
-                    <div class="lg:col-span-2">
-                        <!-- Title and Author -->
-                        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                            <div class="mb-4">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-3">${book.category || 'Uncategorized'}</span>
-                                <h1 class="text-3xl font-bold text-gray-900 mb-2">${book.title || 'Unknown Title'}</h1>
-                                ${book.subtitle ? `<p class="text-xl text-gray-600 mb-4">${book.subtitle}</p>` : ''}
-                                <div class="flex items-center text-gray-600">
-                                    <span class="mr-2">by</span>
-                                    <span class="font-semibold">${book.author || 'Unknown Author'}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                            <h2 class="text-xl font-semibold text-gray-900 mb-4">Description</h2>
-                            <p class="text-gray-700 leading-relaxed">
-                                ${book.description || 'No description available.'}
-                            </p>
-                        </div>
-
-                        <!-- Book Details -->
-                        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                            <h2 class="text-xl font-semibold text-gray-900 mb-4">Book Details</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="space-y-3">
-                                    <div>
-                                        <span class="text-gray-600 font-medium">ISBN:</span>
-                                        <span class="ml-2">${book.isbn || 'Not available'}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">Publisher:</span>
-                                        <span class="ml-2">${book.publisher || 'Unknown Publisher'}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">Publication Date:</span>
-                                        <span class="ml-2">${book.publication_date ? new Date(book.publication_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Not specified'}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">Language:</span>
-                                        <span class="ml-2">${book.language || 'Not specified'}</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <div>
-                                        <span class="text-gray-600 font-medium">Pages:</span>
-                                        <span class="ml-2">${book.page_count || 'Unknown'}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">File Format:</span>
-                                        <span class="ml-2 uppercase">${book.file_format || 'Unknown'}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">File Size:</span>
-                                        <span class="ml-2">${book.file_size_mb || 'Unknown'} MB</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-gray-600 font-medium">Status:</span>
-                                        <span class="ml-2">
-                                            <span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-2 py-1 rounded">Available</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Additional Information -->
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-semibold text-gray-900 mb-4">Additional Information</h2>
-                            <div class="space-y-3">
-                                <div>
-                                    <span class="text-gray-600 font-medium">Created Date:</span>
-                                    <span class="ml-2">${book.created_at ? new Date(book.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Not available'}</span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-600 font-medium">Last Updated:</span>
-                                    <span class="ml-2">${book.updated_at ? new Date(book.updated_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Not available'}</span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-600 font-medium">Book ID:</span>
-                                    <span class="ml-2 text-sm font-mono">${book.id}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        } else {
+            relatedBooksContainer.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <p class="text-muted-foreground">No related books found</p>
                 </div>
+            `;
+        }
+
+    } catch (error) {
+        // Don't show error if request was aborted
+        if (error.name === 'AbortError') {
+            console.log('Related books request was cancelled');
+            return;
+        }
+
+        console.error('Error fetching related books:', error);
+        relatedBooksContainer.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <p class="text-muted-foreground">Error loading related books. Please try again.</p>
             </div>
         `;
-    } else {
-        bookDetail.innerHTML = `
-            <div class="container mx-auto px-4 py-8 max-w-4xl">
-                <div class="flex justify-center">
-                    <div class="bg-white rounded-lg shadow-md p-8 text-center max-w-md">
-                        <div class="text-red-500 mb-4">
-                            <i class="fas fa-exclamation-triangle text-4xl"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Book Not Found</h2>
-                        <p class="text-gray-600 mb-6">The requested book could not be found or loaded. Please check the URL and try again.</p>
-                        <a href="/" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
-                            Go Back to Library
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
+    } finally {
+        // Reset loading state
+        isRelatedLoading = false;
+        currentRelatedRequest = null;
     }
-}
+};
 
-// Helper function to generate star ratings
-function generateStars(rating) {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    for (let i = 0; i < fullStars; i++) {
-        stars.push('<svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>');
+const handleRelatedPageChange = (page) => {
+    // Prevent multiple clicks for the same page
+    if (isRelatedLoading || currentRelatedPage === page) {
+        return;
     }
 
-    if (hasHalfStar) {
-        stars.push('<svg class="w-5 h-5 fill-current opacity-50" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>');
+    // Update URL with new page for related books
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('related_page', page.toString());
+
+    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+    window.history.pushState({ relatedPage: page }, '', newUrl);
+
+    // Scroll to related books section
+    const relatedSection = document.getElementById('related-ebooks');
+    if (relatedSection) {
+        relatedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    const emptyStars = 5 - Math.ceil(rating);
-    for (let i = 0; i < emptyStars; i++) {
-        stars.push('<svg class="w-5 h-5 fill-current opacity-25" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>');
+    // Load new page
+    initializeRelatedBooks(page);
+};
+
+// Handle browser back/forward navigation for related books
+window.addEventListener('popstate', (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const relatedPage = parseInt(urlParams.get('related_page')) || 1;
+
+    // Only load if it's a different page
+    if (relatedPage !== currentRelatedPage) {
+        initializeRelatedBooks(relatedPage);
     }
-
-    return stars.join('');
-}
-
-// Action functions
-function downloadBook(bookId) {
-    console.log('Downloading book:', bookId);
-    // Implement download functionality
-    alert('Download functionality will be implemented here');
-}
-
-function addToFavorites(bookId) {
-    console.log('Adding to favorites:', bookId);
-    // Implement add to favorites functionality
-    alert('Add to favorites functionality will be implemented here');
-}
-
-function purchaseBook(bookId) {
-    console.log('Purchasing book:', bookId);
-    // Implement purchase functionality
-    alert('Purchase functionality will be implemented here');
-}
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
     initializeLayout()
 
     await bookInitial();
+
+    // Get initial related page from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialRelatedPage = parseInt(urlParams.get('related_page')) || 1;
+
+    await initializeRelatedBooks(initialRelatedPage);
 });

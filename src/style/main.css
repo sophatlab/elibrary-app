@@ -106,7 +106,7 @@
     }
 
     .logo {
-        @apply w-fit xs:w-72 shrink-0 border-r border-dashed border-border py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
+        @apply w-fit xs:w-72 shrink-0 lg:border-r border-dashed border-border py-2 px-4 inline-flex gap-1 items-center justify-start font-bold font-sans;
     }
 
     .sidebar {

@@ -41,13 +41,40 @@ export class Cards {
         )
     }
 
+    static relatedBook = (book) => {
+        return (
+            `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
+                <div class="border border-border/10 rounded-lg w-full aspect-[3/4] bg-foreground/10 relative">
+                    <img
+                        src="${imageSource.src(book.image)}"
+                        srcset="${imageSource.srcset(book.image)}"
+                        sizes="(max-width: 640px) 100vw, 176px"
+                        alt="${book.title}"
+                        loading="lazy"
+                        width="250"
+                        height="333"
+                        class="w-full h-full rounded-lg object-cover transition-opacity duration-300 opacity-0 absolute inset-0"
+                        onload="this.classList.remove('opacity-0')"
+                        onerror="this.onerror=null; this.src='${imageSource.error}';"
+                        fetchpriority="auto"
+                    >
+                </div>
+                <div class="mb-2">
+                    <h3 class="font-semibold">${book.title}</h3>
+                    <p class="text-xs">${book.author}</p>
+                </div>
+                <a href="${linkOriginal(`collection/book?id=${book.id}`)}" class="absolute inset-0"></a>
+            </li>`
+        )
+    }
+
 
     static recommendedBook = (book, index) => {
         return (
             `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
                 <img
-                    src="${imageSource.src(`/api/v1/files/thumbnails/${book.cover_image_url}`)}"
-                    srcset="${imageSource.srcset(`/api/v1/files/thumbnails/${book.cover_image_url}`)}"
+                    src="${imageSource.src(`/api/v1/files/thumbnails/${book.cover_image_url || book.image}`)}"
+                    srcset="${imageSource.srcset(`/api/v1/files/thumbnails/${book.cover_image_url || book.image}`)}"
                     sizes="(max-width: 640px) 128px, 176px"
                     alt="${book.title}"
                     loading="${index < 4 ? 'eager' : 'lazy'}"
