@@ -37,7 +37,7 @@ export class Search {
                     </svg>
                     <input
                         type="text"
-                        id="search-input"
+                        id="search-dialog-input"
                         placeholder="Search books, authors, or categories..."
                         class="flex-1 bg-transparent border-0 py-4 text-sm outline-none placeholder:text-muted-foreground"
                         autocomplete="off"
@@ -74,7 +74,7 @@ export class Search {
         setTimeout(() => {
             const dialog = this.createSearchDialog();
             const searchButton = document.getElementById('search-button');
-            const searchInput = document.getElementById('search-input');
+            const searchInput = document.getElementById('search-dialog-input');
             const closeButton = document.getElementById('close-search');
             const searchResults = document.getElementById('search-results');
             const dialogContent = dialog.querySelector('div.search-dialog');
@@ -309,7 +309,7 @@ export class Search {
         if (selectedBook) {
             // Close the search dialog
             const dialog = document.getElementById('search-dialog');
-            const searchInput = document.getElementById('search-input');
+            const searchInput = document.getElementById('search-dialog-input');
             const searchResults = document.getElementById('search-results');
 
             dialog.classList.add('hidden');
