@@ -65,4 +65,27 @@ export class Cards {
             </li>`
         )
     }
+
+
+    static author = (author) => {
+        return (
+            `<li class="shrink-0">
+                <a href="" class="flex flex-col items-center max-w-28">
+                    <img
+                        src="${imageSource.src(`/api/v1/files/authors/${author.image}`)}"
+                        srcset="${imageSource.srcset(`/api/v1/files/authors/${author.image}`)}"
+                        sizes="(max-width: 640px) 100vw, 80px"
+                        loading="lazy"
+                        width="80"
+                        height="80"
+                        onerror="this.onerror=null; this.src='${imageSource.error}';"
+                        fetchpriority="auto"
+                        alt="${author.name}" class="size-20 ring-2 ring-primary rounded-full mb-2"
+                    >
+                    <h3 class="text-sm font-medium line-clamp-1">${author.name}</h3>
+                    <span class="text-xs">${author.books_count} book(s)</span>
+                </a>
+            </li>`
+        )
+    }
 }
