@@ -2,6 +2,24 @@
 
 A modern multi-page eLibrary application built with Webpack, JavaScript ES6 modules, and Tailwind CSS v4.
 
+## Purpose
+
+This project serves as an educational assignment for Year II, Semester II, Batch 23 students at Cambodian University for Specialties, designed to demonstrate:
+
+- Modern web development techniques using JavaScript ES6+
+- Component-based architecture for scalable applications
+- Responsive design implementation with Tailwind CSS
+- API integration and asynchronous data handling
+- Build system configuration with Webpack
+- Version control and project organization
+
+The eLibrary App provides a practical platform for applying these concepts in a real-world application context.
+
+
+## Team Members
+
+- [Sophat LEAT](https://pphat.top) - Project Lead & Developer
+
 ## Features
 
 - **Multi-page Architecture**: Separate pages for Home, Collection, Book Details, and Admin Panel
