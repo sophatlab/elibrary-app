@@ -15,98 +15,33 @@
     <div class="flex mx-auto items-start max-h-[calc(100vh_-57px)] w-full overflow-y-auto">
 
         <main class="w-full p-4 main">
-            <section class="my-5" id="book-detail">
-                <div class="main w-full">
-
-                    <div class="flex items-start justify-start gap-6">
-
-                        <div class="w-full border border-dashed border-border p-5">
-                            <div class="pb-7">
-                                <h1 class="text-3xl font-bold mb-2">Mathematics for Computer Science</h1>
-                                <p class="text-gray-700 mb-4">An in-depth exploration of mathematical concepts essential for computer science.</p>
-
-                                <div class="flex items-center gap-4 mb-4">
-                                    <span class="text-sm text-gray-500">Author: <a href="#" class="text-blue-600 hover:underline">John Doe</a></span>
-                                    <span class="text-sm text-gray-500">Published: 2023</span>
-                                </div>
-                            </div>
-
-                            <div class="border rounded-2xl  border-dashed border-border p-5 flex justify-between gap-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex items-center justify-center gap-0">
-                                        <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-left-laurel-32-3x.d074c7557225d2a0f3f1289a3dde7a7d.png" alt="Book Thumbnail" class="w-7 h-auto">
-                                        <div>
-                                            <h2 class="text-lg font-semibold text-center">Best</h2>
-                                            <p class="text-sm text-center">Top Sales</p>
-                                        </div>
-                                        <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-right-laurel-32-3x.f972b95c999d29e144d9ef970585906d.png" alt="Book Thumbnail" class="w-7 h-auto">
-                                    </div>
-
-                                    <div class="flex items-center justify-center gap-0">
-                                        <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-left-laurel-32-3x.d074c7557225d2a0f3f1289a3dde7a7d.png" alt="Book Thumbnail" class="w-7 h-auto">
-                                        <div>
-                                            <h2 class="text-lg font-semibold text-center">Best</h2>
-                                            <p class="text-sm text-center">Top Sales</p>
-                                        </div>
-                                        <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-right-laurel-32-3x.f972b95c999d29e144d9ef970585906d.png" alt="Book Thumbnail" class="w-7 h-auto">
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center gap-4">
-                                    <div class="px-2">
-                                        <h2 class="text-lg font-semibold leading-5 text-center">4.8/5</h2>
-                                        <p class="text-sm text-center">
-                                            <span class="text-yellow-500">★★★★★</span>
-                                        </p>
-                                    </div>
-                                    <div class="w-px h-full bg-foreground/50"></div>
-                                    <div class="px-2">
-                                        <h2 class="text-lg font-semibold text-center">100</h2>
-                                        <p class="text-sm text-center">Reviews</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-5">
-                                <h2 class="text-xl font-semibold mb-3">Description</h2>
-                                <p class="text-gray-700 mb-4">
-                                    This book provides a comprehensive overview of the mathematical foundations necessary for computer science, including logic, set theory, combinatorics, and graph theory. It is designed for students and professionals who want to deepen their understanding of the mathematical principles that underpin computer algorithms and data structures.
-                                </p>
-
-                                <h2 class="text-xl font-semibold mb-3">Table of Contents</h2>
-                                <ul class="list-disc pl-5 text-gray-700">
-                                    <li>Introduction to Logic</li>
-                                    <li>Set Theory Basics</li>
-                                    <li>Combinatorial Analysis</li>
-                                    <li>Graph Theory Fundamentals</li>
-                                    <li>Applications in Computer Science</li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <div class="w-80 flex flex-col gap-2 shrink-0 sticky top-5 order-last h-auto">
-
-                            <div class="flex border border-dashed border-border px-2 items-center justify-between">
-                                <h2 class="text-xl font-semibold">Price</h2>
-                                <p class="text-2xl font-bold text-green-600">$2.99</p>
-                            </div>
-
-                            <!-- Book thumbnail -->
-                            <div class="border border-dashed border-border p-2">
-                                <img src="https://api.sophat.top/api/v1/files/thumbnails/math-4.webp?q=10&w=512" alt="Book Thumbnail" class="w-full h-auto object-cover">
-                            </div>
-
-                            <div class=" border border-dashed border-border p-2 flex items-center justify-between">
-                                <button type="button" class="button w-full button-primary">
-                                    $2.99 Buy now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <section class="my-5 px-4" id="breadcrumb">
+                <nav aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2 text-sm text-gray-600">
+                        <li>
+                            <a href="/" class="hover:text-primary transition-colors">Home</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <a href="/collection" class="hover:text-primary transition-colors">Collection</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <span class="text-gray-800 font-medium" id="current-collection">Current Collection</span>
+                        </li>
+                    </ol>
+                </nav>
             </section>
+
+            <section class="my-5" id="book-detail"></section>
 
             <!-- Related Books -->
             <section class="my-5 p-4">
