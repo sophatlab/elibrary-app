@@ -7,13 +7,41 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const views = [
+    {
+        template: './src/pages/index.html',
+        filename: 'index.html',
+        chunks: ['index'],
+        title: 'eLibrary - Home'
+    },
+    {
+        template: './src/pages/collection.html',
+        filename: 'collection/index.html',
+        chunks: ['collection'],
+        title: 'eLibrary - Book Catalog'
+    },
+    {
+        template: './src/pages/book.html',
+        filename: 'book/index.html',
+        chunks: ['book'],
+        title: 'eLibrary - Book Details'
+    },
+    {
+        template: './src/pages/admin.html',
+        filename: 'admin/index.html',
+        chunks: ['admin'],
+        title: 'eLibrary - Admin Panel'
+    }
+]
+
+
 export default {
     mode: 'development',
 
     // Multiple entry points for different pages
     entry: {
         index: './src/js/index.js',
-        catalog: './src/js/catalog.js',
+        collection: './src/js/collection.js',
         book: './src/js/book.js',
         admin: './src/js/admin.js'
     },
@@ -58,35 +86,14 @@ export default {
             filename: 'css/[name].[contenthash].css'
         }),
 
-        // Generate HTML files for each page
-        new HtmlWebpackPlugin({
-            template: './src/pages/index.html',
-            filename: 'index.html',
-            chunks: ['index'],
-            title: 'eLibrary - Home'
-        }),
-
-        new HtmlWebpackPlugin({
-            template: './src/pages/catalog.html',
-            filename: 'catalog.html',
-            chunks: ['catalog'],
-            title: 'eLibrary - Book Catalog'
-        }),
-
-        new HtmlWebpackPlugin({
-            template: './src/pages/book.html',
-            filename: 'book.html',
-            chunks: ['book'],
-            title: 'eLibrary - Book Details'
-        }),
-
-        new HtmlWebpackPlugin({
-            template: './src/pages/admin.html',
-            filename: 'admin.html',
-            chunks: ['admin'],
-            title: 'eLibrary - Admin Panel'
-        })
-    ],
+    ].concat(
+        views.map(view => new HtmlWebpackPlugin({
+            template: view.template,
+            filename: view.filename,
+            chunks: view.chunks,
+            title: view.title,
+        }))
+    ),
 
     devServer: {
         static: './dist',
@@ -97,7 +104,7 @@ export default {
         historyApiFallback: {
             rewrites: [
                 { from: /^\/$/, to: '/index.html' },
-                { from: /^\/catalog/, to: '/catalog.html' },
+                { from: /^\/catalog/, to: '/collection.html' },
                 { from: /^\/book/, to: '/book.html' },
                 { from: /^\/admin/, to: '/admin.html' }
             ]
@@ -119,6 +126,6 @@ export default {
                     name: 'common'
                 }
             }
+        }
     }
-  }
 };

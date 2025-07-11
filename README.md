@@ -13,7 +13,7 @@ A modern multi-page eLibrary application built with Webpack, HTML, and Tailwind 
 ## Pages
 
 1. **Home Page** (`/`) - Landing page with hero section and features
-2. **Catalog Page** (`/catalog.html`) - Browse and search books
+2. **Catalog Page** (`/collection.html`) - Browse and search books
 3. **Book Details Page** (`/book.html`) - Detailed view of individual books
 4. **Admin Panel** (`/admin.html`) - Manage books and library settings
 
@@ -35,7 +35,7 @@ elibrary-app/
 │   │   └── admin.js
 │   ├── pages/          # HTML templates
 │   │   ├── index.html
-│   │   ├── catalog.html
+│   │   ├── collection.html
 │   │   ├── book.html
 │   │   └── admin.html
 │   └── style/

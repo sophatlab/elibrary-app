@@ -19,7 +19,7 @@ export class Hero {
                     <h2 class="text-3xl sm:text-4xl text-primary md:text-5xl font-bold">Welcome to eBooks</h2>
                     <p class="text-lg md:text-xl mb-8 text-foreground/50">Discover thousands of books at your fingertips</p>
                     <div class="flex flex-col sm:flex-row gap-2 justify-center">
-                        <a href="/catalog.html" class="button button-primary">
+                        <a href="/collection" class="button button-primary">
                             Browse Collection
                         </a>
                         <a href="/admin.html" class="button ring ring-primary text-primary hover:bg-primary hover:text-primary-foreground">
