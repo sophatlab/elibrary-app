@@ -26,12 +26,12 @@ const views = [
         chunks: ['collection-book'],
         title: 'eBooks Library - Book Details'
     },
-    // {
-    //     template: './src/pages/admin.html',
-    //     filename: 'admin/index.html',
-    //     chunks: ['admin'],
-    //     title: 'eLibrary - Admin Panel'
-    // }
+    {
+        template: './src/pages/404.html',
+        filename: '404/index.html',
+        chunks: ['404'],
+        title: 'eLibrary - Admin Panel'
+    }
 ]
 
 
@@ -43,7 +43,7 @@ export default {
         index: './src/js/index.js',
         collection: './src/js/collection.js',
         'collection-book': './src/js/[collection].js',
-        admin: './src/js/admin.js'
+        '404': './src/js/404.js'
     },
 
     output: {
