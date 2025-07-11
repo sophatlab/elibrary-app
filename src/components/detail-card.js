@@ -53,7 +53,7 @@ export class DetailCard {
                         <div class="mt-5">
                             <h2 class="text-xl font-semibold mb-3">Description</h2>
                             <p class="text-gray-700 mb-4">
-                                This book provides a comprehensive overview of the mathematical foundations necessary for computer science, including logic, set theory, combinatorics, and graph theory. It is designed for students and professionals who want to deepen their understanding of the mathematical principles that underpin computer algorithms and data structures.
+                                ${book.description || "No description available for this book."}
                             </p>
 
                             <h2 class="text-xl font-semibold mb-3">Table of Contents</h2>

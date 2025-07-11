@@ -1,3 +1,5 @@
+import cover from '../assets/covers/home-cover.png';
+
 export default function heroInitalized(callback = () => { }) {
 
     const currentSearchParams = new URLSearchParams(window.location.search);
@@ -6,7 +8,11 @@ export default function heroInitalized(callback = () => { }) {
     const heroContainer = document.getElementById('hero');
     if (heroContainer) {
         heroContainer.innerHTML = `
-            <div class="hero-content text-center py-8">
+            <div class="hero-content text-center px-5 py-8">
+                <div class="absolute flex justify-end inset-0 -right-5">
+                    <img src="${cover}" loading="lazy" alt="Hero Cover Image" class="h-full opacity-25 object-cover">
+                </div>
+
                 <h1 class="text-3xl font-bold mb-4">Welcome to the eLibrary</h1>
                 <p class="text-muted-foreground mb-6">Explore our collection of eBooks and resources</p>
                 <div class="search-container w-full max-w-md mx-auto">

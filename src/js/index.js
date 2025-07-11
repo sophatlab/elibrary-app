@@ -1,7 +1,7 @@
 import { Cards } from '../components/cards.js';
 import { initializeHero } from '../components/hero.js';
 import { initializeLayout } from '../components/layout.js';
-import { APP_API_URL, imageSource } from '../libs/constant.js';
+import { APP_API_URL } from '../libs/constant.js';
 
 const renderRecommendedBooks = async () => {
 
@@ -35,7 +35,6 @@ const renderAuthors = async () => {
 
 
 const renderNewReleaseBooks = async () => {
-
     const newReleaseBooksContainer = document.getElementById('new-release');
     newReleaseBooksContainer.innerHTML = Cards.skeleton({ length: 10 });
     const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))

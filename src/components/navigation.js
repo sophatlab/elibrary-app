@@ -1,20 +1,23 @@
 import { cn } from '../libs/tailwind.js';
 import { Icons } from './icons.js';
 import { Search } from './search.js';
+import { MobileSidebar } from './mobile-sidebar.js';
 
 export class Navigation {
     constructor() {
         this.navigation = document.querySelector('.header');
         this.search = new Search();
+        this.mobileSidebar = null;
         this.render();
         this.themeSwitch();
         this.search.init();
+        this.initializeMobileSidebar();
     }
 
     logo() {
         return (`
             <div class="logo">
-                <a href="/" class="inline-flex items-center gap-2">
+                <a href="/" class="max-md:hidden inline-flex items-center gap-2">
                     <svg class="size-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" >
                         <path d="M5 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
                         <path d="M9 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -25,7 +28,11 @@ export class Navigation {
                         <path d="M16 16l3.923 -.98" />
                     </svg>
                 </a>
-                <span class="text-2xl">eBooks</span>
+
+                <button type="button" class="border p-1.5 rounded-xl md:hidden border-dashed border-border" aria-label="Toggle Navigation" id="burger-menu">
+                    ${Icons.burger("size-6")}
+                </button>
+                <span class="max-sm:hidden text-2xl">eBooks</span>
             </div>
         `)
     }
@@ -47,24 +54,6 @@ export class Navigation {
         return (`<span class="sr-only">Theme</span> ${themeButton.outerHTML}`)
     }
 
-    moonIcon() {
-        return (`
-            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
-            </svg>
-        `)
-    }
-
-    sunIcon() {
-        return (`
-            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
-                <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
-                <path d="M19 11h2m-1 -1v2" />
-            </svg>
-        `)
-    }
 
     modules = [
         {
@@ -81,14 +70,21 @@ export class Navigation {
             url: "collection",
             icon: Icons.collection()
         },
-        {
-            id: 3,
-            title: "Helps",
-            isActive: false,
-            url: "/help",
-            icon: Icons.help()
-        },
+        // {
+        //     id: 3,
+        //     title: "Helps",
+        //     isActive: false,
+        //     url: "/help",
+        //     icon: Icons.help()
+        // },
     ]
+
+    initializeMobileSidebar() {
+        // Initialize mobile sidebar after the navigation is rendered
+        setTimeout(() => {
+            this.mobileSidebar = new MobileSidebar(this.modules);
+        }, 100);
+    }
 
     themeSwitch() {
         // Attach theme toggle event
@@ -100,22 +96,21 @@ export class Navigation {
         if (savedTheme) {
             if (savedTheme === 'dark') {
                 document.documentElement.classList.add('dark');
-                themeButton.innerHTML = this.moonIcon();
+                themeButton.innerHTML = Icons.moon();
             } else {
                 document.documentElement.classList.remove('dark');
-                themeButton.innerHTML = this.sunIcon();
+                themeButton.innerHTML = Icons.sun();
             }
         } else {
             // If no saved theme, use system preference
             if (isDarkModePreferred) {
                 document.documentElement.classList.add('dark');
-                themeButton.innerHTML = this.moonIcon();
+                themeButton.innerHTML = Icons.moon();
             } else {
                 document.documentElement.classList.remove('dark');
-                themeButton.innerHTML = this.sunIcon();
+                themeButton.innerHTML = Icons.sun();
             }
         }
-
 
         if (themeButton) {
             themeButton.addEventListener('click', () => {
@@ -125,7 +120,12 @@ export class Navigation {
                 // Save theme preference in localStorage
                 const isDarkMode = document.documentElement.classList.contains('dark');
                 localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-                themeButton.innerHTML = isDarkMode ? this.moonIcon() : this.sunIcon();
+                themeButton.innerHTML = isDarkMode ? Icons.moon() : Icons.sun();
+
+                // Update mobile theme icon as well
+                if (this.mobileSidebar) {
+                    this.mobileSidebar.updateMobileThemeIcon();
+                }
             });
         }
     }
@@ -159,7 +159,7 @@ export class Navigation {
 
     renderModule() {
         const container = document.createElement('ol')
-        container.classList = "flex items-center p-4 gap-2";
+        container.classList = "flex items-center p-4 gap-2 max-md:hidden";
         const sidebarContent = this.modules.map(item => {
             // Check if this item should be active based on current URL
             const isActive = this.isUrlActive(item.url);
@@ -169,7 +169,6 @@ export class Navigation {
                     <a class="${cn("group relative inline-flex w-full py-1 px-3 rounded-2xl justify-start items-center gap-3 font-medium hover:bg-primary/5 hover:text-primary", isActive ? "text-primary bg-primary/5 border border-primary/10 border-dashed" : "text-foreground/80")}"
                         aria-current="${isActive ? 'page' : 'false'}"
                         href="${new URL(item.url, window.location.origin)}">
-                        ${item.icon}
                         ${item.title}
                     </a>
                 </li>

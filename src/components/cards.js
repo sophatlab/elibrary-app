@@ -107,10 +107,10 @@ export class Cards {
                         height="80"
                         onerror="this.onerror=null; this.src='${imageSource.error}';"
                         fetchpriority="auto"
-                        alt="${author.name}" class="size-20 ring-2 ring-primary rounded-full mb-2"
+                        alt="${author.name}" class="size-16 ring-2 ring-primary/90 rounded-full mb-2"
                     >
                     <h3 class="text-sm font-medium line-clamp-1">${author.name}</h3>
-                    <span class="text-xs">${author.books_count} book(s)</span>
+                    <span class="text-xs">${author.books_count} book</span>
                 </a>
             </li>`
         )
