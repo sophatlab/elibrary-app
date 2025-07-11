@@ -14,9 +14,9 @@ A modern multi-page eLibrary application built with Webpack, JavaScript ES6 modu
 
 ## Pages
 
-1. **Home Page** (`/`) - Landing page with hero section and call-to-action
-2. **Collection Page** (`/collection/`) - Browse and search books catalog
-3. **Book Details Page** (`/book/`) - Detailed view of individual books
+1. **Home Page** (`/`) - Landing page with hero section and featured books
+2. **Collection Page** (`/collection/`) - Browse and search books catalog with category filtering
+3. **Book Details Page** (`/collection/book/`) - Detailed view of individual books with related recommendations
 4. **Admin Panel** (`/admin/`) - Administrative interface for managing books
 
 ## Project Structure
@@ -27,28 +27,38 @@ elibrary-app/
 │   ├── js/                     # JavaScript entry points
 │   │   ├── index.js            # Home page
 │   │   ├── collection.js       # Collection page
-│   │   ├── [collection].js     # Dynamic collection routes
-│   │   ├── book.js             # Book details page
+│   │   ├── [collection].js     # Book details page
 │   │   └── admin.js            # Admin panel
 │   ├── components/             # Reusable components
-│   │   ├── navigation.js       # Header navigation with theme toggle
-│   │   ├── hero.js             # Hero section component
+│   │   ├── admin.js            # Admin panel functionality
+│   │   ├── cards.js            # Book card components
 │   │   ├── catalog.js          # Book catalog functionality
+│   │   ├── category-tab.js     # Category filtering tabs
+│   │   ├── detail-card.js      # Book detail card component
+│   │   ├── hero.js             # Hero section component (home page)
+│   │   ├── hero-search.js      # Hero with search (collection page)
+│   │   ├── icons.js            # Icon components
+│   │   ├── layout.js           # Layout initialization
+│   │   ├── mobile-sidebar.js   # Mobile navigation sidebar
+│   │   ├── navigation.js       # Header navigation with theme toggle
+│   │   ├── pagination.js       # Pagination component
 │   │   └── search.js           # Search modal component
 │   ├── pages/                  # HTML templates
 │   │   ├── index.html          # Home page
 │   │   ├── collection.html     # Collection page
-│   │   ├── [collection].html   # Dynamic collection template
-│   │   ├── book.html           # Book details page
+│   │   ├── [collection].html   # Book details page
 │   │   └── admin.html          # Admin panel
 │   ├── assets/                 # Static assets
+│   │   ├── badges/             # Badge images
 │   │   └── covers/             # Book cover images
+│   ├── libs/                   # Utility libraries
+│   │   ├── constant.js         # App constants and API configuration
+│   │   └── tailwind.js         # Tailwind utility functions
 │   └── style/
-│       └── main.css            # Tailwind CSS v4
+│       └── main.css            # Tailwind CSS v4 with custom styles
 ├── dist/                       # Built files (generated)
 ├── webpack.config.js           # Webpack configuration
 ├── postcss.config.mjs          # PostCSS configuration
-├── tailwind.config.js          # Tailwind configuration
 └── package.json
 ```
 
@@ -95,9 +105,18 @@ This will create optimized files in the `dist/` directory with content hashing.
 
 ### Component Architecture
 - **Navigation Component**: Responsive header with logo, search, theme toggle, and GitHub link
-- **Hero Component**: Landing page hero section with dynamic background
-- **Search Component**: Modal-based search interface
-- **Catalog Component**: Book grid with filtering and search functionality
+- **Hero Components**: Landing page hero and search-enabled hero for collection page
+- **Search Component**: Modal-based search interface with debounced API calls
+- **Cards Component**: Reusable book card components for different contexts
+- **Pagination Component**: Reusable pagination with page navigation
+- **Mobile Sidebar**: Responsive mobile navigation with theme toggle
+- **Category Tabs**: Dynamic category filtering for book collections
+
+### API Integration
+- **External API**: Integrated with `https://api.sophat.top` for book data
+- **Image Optimization**: Dynamic image sizing and srcset generation
+- **Error Handling**: Graceful fallbacks for failed API calls and missing images
+- **Caching**: Request cancellation and loading state management
 
 ### Theme System
 - Dark/Light mode toggle with system preference detection
@@ -118,6 +137,7 @@ This will create optimized files in the `dist/` directory with content hashing.
 - Custom utility classes and components
 - Responsive design utilities
 - Modern color palette with CSS custom properties
+- Custom component classes for consistent styling
 
 ## Browser Support
 
