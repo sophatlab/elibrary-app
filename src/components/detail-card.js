@@ -81,7 +81,7 @@ export class DetailCard {
                         </div>
 
                         <div class=" border border-dashed border-border p-2 flex items-center justify-between">
-                            <button type="button" class="button w-full button-primary">
+                            <button type="button" class="button w-full button-primary bg-primary text-primary-foreground font-semibold hover:bg-primary/90">
                                 $${book.price} Buy now
                             </button>
                         </div>

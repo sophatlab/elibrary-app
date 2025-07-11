@@ -46,24 +46,26 @@ export class Cards {
             `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
                 <div class="border border-border/10 rounded-lg w-full aspect-[3/4] bg-foreground/10 relative">
                     <img
-                        src="${imageSource.src(book.image)}"
-                        srcset="${imageSource.srcset(book.image)}"
-                        sizes="(max-width: 640px) 100vw, 176px"
-                        alt="${book.title}"
-                        loading="lazy"
-                        width="250"
-                        height="333"
-                        class="w-full h-full rounded-lg object-cover transition-opacity duration-300 opacity-0 absolute inset-0"
-                        onload="this.classList.remove('opacity-0')"
-                        onerror="this.onerror=null; this.src='${imageSource.error}';"
-                        fetchpriority="auto"
+                    src="${imageSource.src(book.image)}"
+                    srcset="${imageSource.srcset(book.image)}"
+                    sizes="(max-width: 640px) 100vw, 176px"
+                    alt="${book.title} book cover"
+                    loading="lazy"
+                    width="250"
+                    height="333"
+                    class="w-full h-full rounded-lg object-cover transition-opacity duration-300 opacity-0 absolute inset-0"
+                    onload="this.classList.remove('opacity-0')"
+                    onerror="this.onerror=null; this.src='${imageSource.error}';"
+                    fetchpriority="auto"
                     >
                 </div>
                 <div class="mb-2">
                     <h3 class="font-semibold">${book.title}</h3>
                     <p class="text-xs">${book.author}</p>
                 </div>
-                <a href="${linkOriginal(`collection/book?id=${book.id}`)}" class="absolute inset-0"></a>
+                <a href="${linkOriginal(`collection/book?id=${book.id}`)}"
+                    aria-label="View details of ${book.title} by ${book.author}"
+                    class="absolute inset-0"></a>
             </li>`
         )
     }

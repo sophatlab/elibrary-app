@@ -11,14 +11,14 @@ export class Search {
         const searchButton = document.createElement('button');
         searchButton.classList = "w-full cursor-pointer inline-flex text-xs gap-1 py-1.5 px-3 items-center bg-foreground/5 border border-border rounded-4xl";
         searchButton.setAttribute('type', 'button');
-        searchButton.setAttribute('role', 'search');
         searchButton.setAttribute('id', 'search-button');
+        searchButton.setAttribute('aria-label', 'Open search dialog');
         searchButton.innerHTML = (`
-            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                 <path d="M21 21l-6 -6" />
             </svg>
-            Ctrl + K
+            <span aria-hidden="true">Ctrl + K</span>
         `);
 
         return (` <span class="sr-only">Search</span> ${searchButton.outerHTML} `)
