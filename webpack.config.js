@@ -30,7 +30,7 @@ const views = [
         template: './src/pages/404.html',
         filename: '404/index.html',
         chunks: ['404'],
-        title: 'eLibrary - Admin Panel'
+        title: 'eLibrary - Page Not Found'
     }
 ]
 
@@ -104,9 +104,10 @@ export default {
         historyApiFallback: {
             rewrites: [
                 { from: /^\/$/, to: '/index.html' },
-                { from: /^\/catalog/, to: '/collection.html' },
-                { from: /^\/book/, to: '/book.html' },
-                { from: /^\/admin/, to: '/admin.html' }
+                { from: /^\/collection$/, to: '/collection/index.html' },
+                { from: /^\/collection\/book/, to: '/collection/book/index.html' },
+                { from: /^\/admin/, to: '/admin.html' },
+                { from: /./, to: '/404/index.html' }  // Catch-all for 404
             ]
         }
     },
