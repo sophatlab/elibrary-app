@@ -12,26 +12,26 @@ const views = [
         template: './src/pages/index.html',
         filename: 'index.html',
         chunks: ['index'],
-        title: 'eLibrary - Home'
+        title: 'eBooks Library - Home'
     },
     {
         template: './src/pages/collection.html',
         filename: 'collection/index.html',
         chunks: ['collection'],
-        title: 'eLibrary - Book Catalog'
+        title: 'eBooks Library - Collection'
     },
     {
         template: './src/pages/[collection].html',
         filename: 'collection/book/index.html',
         chunks: ['collection-book'],
-        title: 'eLibrary - Book Catalog'
+        title: 'eBooks Library - Book Details'
     },
-    {
-        template: './src/pages/admin.html',
-        filename: 'admin/index.html',
-        chunks: ['admin'],
-        title: 'eLibrary - Admin Panel'
-    }
+    // {
+    //     template: './src/pages/admin.html',
+    //     filename: 'admin/index.html',
+    //     chunks: ['admin'],
+    //     title: 'eLibrary - Admin Panel'
+    // }
 ]
 
 
