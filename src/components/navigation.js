@@ -1,3 +1,5 @@
+import { cn } from '../libs/tailwind.js';
+import { Icons } from './icons.js';
 import { Search } from './search.js';
 
 export class Navigation {
@@ -64,6 +66,30 @@ export class Navigation {
         `)
     }
 
+    modules = [
+        {
+            id: 1,
+            title: "Home",
+            isActive: true,
+            url: "/",
+            icon: Icons.home()
+        },
+        {
+            id: 2,
+            title: "Collection",
+            isActive: false,
+            url: "collection",
+            icon: Icons.collection()
+        },
+        {
+            id: 3,
+            title: "Helps",
+            isActive: false,
+            url: "/help",
+            icon: Icons.help()
+        },
+    ]
+
     themeSwitch() {
         // Attach theme toggle event
         const themeButton = document.getElementById('theme-toggle-button');
@@ -115,11 +141,55 @@ export class Navigation {
         )
     }
 
+    isUrlActive(itemUrl) {
+        const currentPath = window.location.pathname;
+        const itemPath = new URL(itemUrl, window.location.origin).pathname;
+
+        if (itemPath === '/' && currentPath === '/') {
+            return true;
+        }
+
+        // For other pages, check if current path starts with item path
+        if (itemPath !== '/' && currentPath.startsWith(itemPath)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    renderModule() {
+        const container = document.createElement('ol')
+        container.classList = "flex items-center p-4 gap-2";
+        const sidebarContent = this.modules.map(item => {
+            // Check if this item should be active based on current URL
+            const isActive = this.isUrlActive(item.url);
+
+            return (`
+                <li>
+                    <a class="${cn("group relative inline-flex w-full py-1 px-3 rounded-2xl justify-start items-center gap-3 font-medium hover:bg-primary/5 hover:text-primary", isActive ? "text-primary bg-primary/5 border border-primary/10 border-dashed" : "text-foreground/80")}"
+                        aria-current="${isActive ? 'page' : 'false'}"
+                        href="${new URL(item.url, window.location.origin)}">
+                        ${item.icon}
+                        ${item.title}
+                    </a>
+                </li>
+            `)
+        }).join('');
+
+        container.innerHTML = sidebarContent;
+
+        return container.outerHTML;
+    }
+
+
+
     render() {
         if (!this.navigation) return;
 
         const navContent = `
             ${this.logo()}
+            ${this.renderModule()}
+
             <nav class="sm:px-6 lg:px-8">
                 <ul class="flex items-center justify-end gap-4" role="menubar">
                     <li role="menuitem">

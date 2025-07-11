@@ -27,12 +27,6 @@ const views = [
         title: 'eLibrary - Book Catalog'
     },
     {
-        template: './src/pages/book.html',
-        filename: 'book/index.html',
-        chunks: ['book'],
-        title: 'eLibrary - Book Details'
-    },
-    {
         template: './src/pages/admin.html',
         filename: 'admin/index.html',
         chunks: ['admin'],
@@ -49,7 +43,6 @@ export default {
         index: './src/js/index.js',
         collection: './src/js/collection.js',
         'collection-book': './src/js/[collection].js',
-        book: './src/js/book.js',
         admin: './src/js/admin.js'
     },
 

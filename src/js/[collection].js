@@ -30,22 +30,7 @@ const bookInitial = async () => {
     if (book && book.id) {
         bookDetail.innerHTML = DetailCard.bookSection(book);
     } else {
-        bookDetail.innerHTML = `
-            <div class="container mx-auto px-4 py-8 max-w-4xl">
-                <div class="flex justify-center">
-                    <div class="bg-white rounded-lg shadow-md p-8 text-center max-w-md">
-                        <div class="text-red-500 mb-4">
-                            <i class="fas fa-exclamation-triangle text-4xl"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Book Not Found</h2>
-                        <p class="text-gray-600 mb-6">The requested book could not be found or loaded. Please check the URL and try again.</p>
-                        <a href="/" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
-                            Go Back to Library
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
+        location.href = '/404';
     }
 }
 

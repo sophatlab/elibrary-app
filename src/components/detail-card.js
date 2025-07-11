@@ -15,7 +15,7 @@ export class DetailCard {
 
         return `
             <div class="main w-full">
-                <div class="flex items-start justify-start gap-6">
+                <div class="flex max-md:flex-col items-start justify-start gap-6">
 
                     <div class="w-full border border-dashed border-border p-5">
                         <div class="pb-7">
@@ -68,7 +68,7 @@ export class DetailCard {
 
                     </div>
 
-                    <div class="w-80 flex flex-col gap-2 shrink-0 sticky top-5 order-last h-auto">
+                    <div class="max-md:w-full w-80 flex flex-col gap-2 shrink-0 md:sticky top-5 max-md:order-first order-last h-auto">
 
                         <div class="flex border border-dashed border-border px-2 items-center justify-between">
                             <h2 class="text-xl font-semibold">Price</h2>
@@ -77,7 +77,7 @@ export class DetailCard {
 
                         <!-- Book thumbnail -->
                         <div class="border border-dashed border-border p-2">
-                            <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=10&w=512`, APP_API_URL)}" alt="Book Thumbnail" class="w-full h-auto object-cover">
+                            <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=10&w=250`, APP_API_URL)}" alt="Book Thumbnail" class="w-full h-auto object-cover">
                         </div>
 
                         <div class=" border border-dashed border-border p-2 flex items-center justify-between">
