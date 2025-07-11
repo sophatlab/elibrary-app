@@ -1,49 +1,54 @@
 # eLibrary App
 
-A modern multi-page eLibrary application built with Webpack, HTML, and Tailwind CSS.
+A modern multi-page eLibrary application built with Webpack, JavaScript ES6 modules, and Tailwind CSS v4.
 
 ## Features
 
-- **Multi-page Architecture**: Separate pages for Home, Catalog, Book Details, and Admin Panel
-- **Responsive Design**: Built with Tailwind CSS for mobile-first responsive design
-- **Modern Build System**: Webpack with hot module replacement for development
-- **Code Splitting**: Optimized bundle splitting for better performance
-- **Asset Management**: Automatic handling of images, fonts, and CSS
+- **Multi-page Architecture**: Separate pages for Home, Collection, Book Details, and Admin Panel
+- **Modern JavaScript**: ES6 modules with component-based architecture
+- **Responsive Design**: Built with Tailwind CSS v4 for mobile-first responsive design
+- **Dark/Light Theme**: Toggle between dark and light modes with localStorage persistence
+- **Search Functionality**: Global search with modal interface
+- **Modern Build System**: Webpack with hot module replacement and code splitting
+- **Asset Management**: Automatic handling of images, fonts, and CSS with content hashing
 
 ## Pages
 
-1. **Home Page** (`/`) - Landing page with hero section and features
-2. **Catalog Page** (`/collection.html`) - Browse and search books
-3. **Book Details Page** (`/book.html`) - Detailed view of individual books
-4. **Admin Panel** (`/admin.html`) - Manage books and library settings
+1. **Home Page** (`/`) - Landing page with hero section and call-to-action
+2. **Collection Page** (`/collection/`) - Browse and search books catalog
+3. **Book Details Page** (`/book/`) - Detailed view of individual books
+4. **Admin Panel** (`/admin/`) - Administrative interface for managing books
 
 ## Project Structure
 
 ```
 elibrary-app/
 ├── src/
-│   ├── js/                 # JavaScript entry points
-│   │   ├── index.js        # Home page
-│   │   ├── catalog.js      # Catalog page
-│   │   ├── book.js         # Book details page
-│   │   └── admin.js        # Admin panel
-│   ├── components/         # Reusable components
-│   │   ├── navigation.js
-│   │   ├── hero.js
-│   │   ├── catalog.js
-│   │   ├── book-details.js
-│   │   └── admin.js
-│   ├── pages/          # HTML templates
-│   │   ├── index.html
-│   │   ├── collection.html
-│   │   ├── book.html
-│   │   └── admin.html
+│   ├── js/                     # JavaScript entry points
+│   │   ├── index.js            # Home page
+│   │   ├── collection.js       # Collection page
+│   │   ├── [collection].js     # Dynamic collection routes
+│   │   ├── book.js             # Book details page
+│   │   └── admin.js            # Admin panel
+│   ├── components/             # Reusable components
+│   │   ├── navigation.js       # Header navigation with theme toggle
+│   │   ├── hero.js             # Hero section component
+│   │   ├── catalog.js          # Book catalog functionality
+│   │   └── search.js           # Search modal component
+│   ├── pages/                  # HTML templates
+│   │   ├── index.html          # Home page
+│   │   ├── collection.html     # Collection page
+│   │   ├── [collection].html   # Dynamic collection template
+│   │   ├── book.html           # Book details page
+│   │   └── admin.html          # Admin panel
+│   ├── assets/                 # Static assets
+│   │   └── covers/             # Book cover images
 │   └── style/
-│       └── main.css        # Tailwind CSS
-├── dist/                   # Built files (generated)
-├── webpack.config.js       # Webpack configuration
-├── tailwind.config.js      # Tailwind configuration
-├── postcss.config.mjs      # PostCSS configuration
+│       └── main.css            # Tailwind CSS v4
+├── dist/                       # Built files (generated)
+├── webpack.config.js           # Webpack configuration
+├── postcss.config.mjs          # PostCSS configuration
+├── tailwind.config.js          # Tailwind configuration
 └── package.json
 ```
 
@@ -51,7 +56,7 @@ elibrary-app/
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v16 or higher)
 - npm or yarn
 
 ### Installation
@@ -78,7 +83,7 @@ Build the application for production:
 npm run build
 ```
 
-This will create optimized files in the `dist/` directory.
+This will create optimized files in the `dist/` directory with content hashing.
 
 ### Available Scripts
 
@@ -86,56 +91,33 @@ This will create optimized files in the `dist/` directory.
 - `npm run build` - Build for production
 - `npm start` - Start development server and open browser
 
-## Webpack Configuration
+## Technical Features
 
-The Webpack configuration includes:
+### Component Architecture
+- **Navigation Component**: Responsive header with logo, search, theme toggle, and GitHub link
+- **Hero Component**: Landing page hero section with dynamic background
+- **Search Component**: Modal-based search interface
+- **Catalog Component**: Book grid with filtering and search functionality
 
-- **Multiple Entry Points**: Each page has its own entry point
-- **HTML Generation**: Automatic HTML file generation for each page
-- **CSS Extraction**: Separate CSS files for production
-- **Asset Management**: Handling of images, fonts, and other assets
-- **Code Splitting**: Vendor and common chunk splitting
-- **Dev Server**: Hot module replacement and history API fallback
+### Theme System
+- Dark/Light mode toggle with system preference detection
+- localStorage persistence for theme preference
+- Smooth transitions between themes
+- Icon changes based on current theme
 
-## Tailwind CSS
+### Webpack Configuration
+- **Multiple Entry Points**: Each page has its own JavaScript entry point
+- **HTML Generation**: Automatic HTML file generation with proper chunking
+- **CSS Extraction**: Separate CSS files for production with content hashing
+- **Asset Management**: Optimized handling of images, fonts, and other assets
+- **Code Splitting**: Vendor and common chunk splitting for optimal loading
+- **History API Fallback**: Proper routing for single-page application behavior
 
-The project uses Tailwind CSS v4 with PostCSS for styling. The configuration includes:
-
-- Modern utility classes
+### Tailwind CSS v4
+- Latest Tailwind CSS with PostCSS integration
+- Custom utility classes and components
 - Responsive design utilities
-- Custom color palette
-- Component-friendly structure
-
-## Features
-
-### Navigation
-- Responsive navigation with mobile menu
-- Active page highlighting
-- Smooth transitions
-
-### Home Page
-- Hero section with call-to-action buttons
-- Features showcase
-- Modern gradient design
-
-### Catalog Page
-- Book grid layout
-- Search functionality
-- Genre filtering
-- Loading states
-
-### Book Details Page
-- Detailed book information
-- Rating display
-- Related books section
-- Action buttons
-
-### Admin Panel
-- Statistics dashboard
-- Book management table
-- Add/Edit/Delete functionality
-- Search and filtering
-- Modal dialogs
+- Modern color palette with CSS custom properties
 
 ## Browser Support
 
@@ -144,12 +126,30 @@ The project uses Tailwind CSS v4 with PostCSS for styling. The configuration inc
 - Safari (latest)
 - Edge (latest)
 
+## Development Features
+
+### Hot Module Replacement
+- Instant updates during development
+- CSS hot reloading
+- JavaScript module hot swapping
+
+### Development Server
+- Port 3000 with auto-open
+- Compression enabled
+- History API fallback for client-side routing
+
+### Build Optimization
+- Content hashing for cache busting
+- Vendor chunk splitting
+- Common chunk extraction
+- Minification and optimization
+
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Add tests if needed
+3. Make your changes following the existing code style
+4. Test your changes locally
 5. Submit a pull request
 
 ## License
