@@ -20,11 +20,11 @@ export class DetailCard {
                     <div class="w-full border border-dashed border-border p-5">
                         <div class="pb-7">
                             <h1 class="text-3xl font-bold mb-2">${book.title}</h1>
-                            <p class="text-gray-700 mb-4">${book.subtitle}</p>
+                            <p class="text-foreground/80 mb-4">${book.subtitle}</p>
 
                             <div class="flex items-center gap-4 mb-4">
-                                <span class="text-sm text-gray-500">Author: <a href="#" class="text-primary hover:underline">${book.author}</a></span>
-                                <span class="text-sm text-gray-500">Published: ${new Date(book.publication_date).toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'})}</span>
+                                <span class="text-sm text-foreground/70">Author: <a href="#" class="text-primary hover:underline">${book.author}</a></span>
+                                <span class="text-sm text-foreground/70">Published: ${new Date(book.publication_date).toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'})}</span>
                             </div>
                         </div>
 
@@ -52,12 +52,12 @@ export class DetailCard {
 
                         <div class="mt-5">
                             <h2 class="text-xl font-semibold mb-3">Description</h2>
-                            <p class="text-gray-700 mb-4">
+                            <p class="text-foreground/80 mb-4">
                                 ${book.description || "No description available for this book."}
                             </p>
 
                             <h2 class="text-xl font-semibold mb-3">Table of Contents</h2>
-                            <ul class="list-disc pl-5 text-gray-700">
+                            <ul class="list-disc pl-5 text-foreground/80">
                                 <li>Introduction to Logic</li>
                                 <li>Set Theory Basics</li>
                                 <li>Combinatorial Analysis</li>
