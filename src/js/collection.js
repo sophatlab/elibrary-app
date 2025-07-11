@@ -1,84 +1,9 @@
+import { Cards } from '../components/cards.js';
+import { initializeCategoryTab } from '../components/category-tab.js';
+import heroInitalized from '../components/hero-search.js';
 import { initializeLayout } from '../components/layout.js';
-import { loadingCard } from '../components/loading.js';
 import { initializePagination } from '../components/pagination.js';
 import { APP_API_URL } from '../libs/constant.js';
-
-const heroInitalized = () => {
-
-    const currentSearchParams = new URLSearchParams(window.location.search);
-    const searchTerm = currentSearchParams.get('search') || '';
-
-    const heroContainer = document.getElementById('hero');
-    if (heroContainer) {
-        heroContainer.innerHTML = `
-            <div class="hero-content text-center py-8">
-                <h1 class="text-3xl font-bold mb-4">Welcome to the eLibrary</h1>
-                <p class="text-muted-foreground mb-6">Explore our collection of eBooks and resources</p>
-                <div class="search-container w-full max-w-md mx-auto">
-                    <form id="search-form" class="relative">
-                        <input
-                            type="text"
-                            id="search-input"
-                            placeholder="Search for books, authors..."
-                            value="${searchTerm}"
-                            class="w-full px-5 py-2 rounded-full transition-all ring ring-primary bg-background/30 backdrop-blur-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
-                        >
-                        <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        `;
-
-        // Add event listener for search form with debounce
-        const searchForm = document.getElementById('search-form');
-        let searchTimeout = null;
-
-        searchForm.addEventListener('input', (e) => {
-            e.preventDefault();
-
-            // Clear existing timeout
-            if (searchTimeout) {
-                clearTimeout(searchTimeout);
-            }
-
-            // Set a new timeout for debouncing
-            searchTimeout = setTimeout(() => {
-                // push history state with search term
-                const searchTerm = document.getElementById('search-input').value.trim();
-                const urlParams = new URLSearchParams(window.location.search);
-
-                if (searchTerm) {
-                    urlParams.set('search', searchTerm);
-                    urlParams.delete('page');
-                    window.history.pushState({ search: searchTerm }, '', `${window.location.pathname}?${urlParams.toString()}`);
-                } else {
-                    urlParams.delete('search');
-                    urlParams.delete('page');
-                    window.history.pushState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-                }
-
-                const currentPage = parseInt(urlParams.get('page')) || 1;
-                initializeCategoryTab();
-                initializeBooks(currentPage);
-            }, 500);
-        });
-    }
-}
-
-
-
-
-const categories = [
-    { name: 'All', isActive: true, url: '?category=All' },
-    { name: 'Recommendations', isActive: false, url: '?category=Recommendations' },
-    { name: 'ភាសាខ្មែរ', isActive: false, url: '?category=ភាសាខ្មែរ' },
-    { name: 'គណិតវិទ្យា', isActive: false, url: '?category=គណិតវិទ្យា' }
-];
 
 // Set books per page based on screen size
 const getBookPerPage = () => {
@@ -108,28 +33,6 @@ let currentRequest = null;
 let isLoading = false;
 let currentPage = 1;
 
-const initializeCategoryTab = () => {
-    const categoryContainer = document.getElementById('category-tab');
-    categoryContainer.innerHTML = categories.map(category => {
-
-        // Get current URL parameters to preserve search terms
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentCategory = urlParams.get('category');
-
-        const searchObject = Object.fromEntries(urlParams.entries());
-        const itemObject = Object.fromEntries(new URLSearchParams(category.url).entries())
-        const newUrlParams = new URLSearchParams({ ...searchObject, ...itemObject });
-
-        return (
-            `<li class="shrink-0">
-                <a href="?${newUrlParams.toString()}" class="button ${(currentCategory === category.name || (currentCategory === null && category.isActive))
-                ? 'button-primary' : 'text-primary ring-primary ring hover:bg-primary hover:text-primary-foreground'}">
-                    ${category.name}
-                </a>
-            </li>`
-        );
-    }).join('');
-};
 
 const initializeBooks = async (page = 1) => {
     // Prevent multiple simultaneous requests
@@ -151,7 +54,7 @@ const initializeBooks = async (page = 1) => {
     const paginationContainer = document.getElementById('pagination-container');
 
     // Show loading state
-    newReleaseBooksContainer.innerHTML = loadingCard({
+    newReleaseBooksContainer.innerHTML = Cards.skeleton({
         length: BOOKS_PER_PAGE,
         className: "shrink-0 w-full aspect-[3/4] sm:w-44 overflow-hidden"
     });
@@ -191,31 +94,7 @@ const initializeBooks = async (page = 1) => {
         const totalPages = Math.ceil(totalBooks / BOOKS_PER_PAGE);
 
         // Render books
-        newReleaseBooksContainer.innerHTML = books.map(book => `
-            <li class="shrink-0 w-full relative sm:w-[11.85rem] overflow-hidden">
-                <div class="border border-border/10 rounded-lg w-full aspect-[3/4] bg-foreground/10 relative">
-                    <img
-                        src="${new URL(`${book.image}?q=10&w=50`, APP_API_URL)}"
-                        srcset="${new URL(`${book.image}?q=10&w=100`, APP_API_URL)} 100w,
-                                ${new URL(`${book.image}?q=40&w=200`, APP_API_URL)} 200w,
-                                ${new URL(`${book.image}?q=60&w=250`, APP_API_URL)} 250w"
-                        sizes="(max-width: 640px) 100vw, 176px"
-                        alt="${book.title}"
-                        loading="lazy"
-                        width="250"
-                        height="333"
-                        class="w-full h-full rounded-lg object-cover transition-opacity duration-300 opacity-0 absolute inset-0"
-                        onload="this.classList.remove('opacity-0')"
-                        onerror="this.src='../assets/images/placeholder.png'; this.classList.remove('opacity-0')"
-                    >
-                </div>
-                <div class="mb-2">
-                    <h3 class="font-semibold">${book.title}</h3>
-                    <p class="text-xs">${book.author}</p>
-                </div>
-                <a href="/book?id=${book.id}" class="absolute inset-0"></a>
-            </li>
-        `).join('');
+        newReleaseBooksContainer.innerHTML = books.map(Cards.book).join('');
 
         // Initialize pagination if there are multiple pages
         if (totalPages > 1) {
@@ -288,7 +167,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize layout
     initializeLayout();
 
-    heroInitalized()
+    heroInitalized((currentPage)=> {
+        initializeCategoryTab();
+        initializeBooks(currentPage);
+    })
 
     initializeCategoryTab();
 

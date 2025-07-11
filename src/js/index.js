@@ -1,13 +1,13 @@
+import { Cards } from '../components/cards.js';
 import { initializeHero } from '../components/hero.js';
 import { initializeLayout } from '../components/layout.js';
-import { loadingCard } from '../components/loading.js';
 import { APP_API_URL } from '../libs/constant.js';
 
 const renderRecommendedBooks = async () => {
 
     const recommendedBooksContainer = document.getElementById('recommended-books');
     // set loading state
-    recommendedBooksContainer.innerHTML = loadingCard({ length: 10 });
+    recommendedBooksContainer.innerHTML = Cards.skeleton({ length: 10 });
     const books = await fetch(new URL(`/api/v1/recommendations/trending`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
@@ -16,29 +16,7 @@ const renderRecommendedBooks = async () => {
             return [];
         });
 
-    recommendedBooksContainer.innerHTML = Array.from(books).map((book, index) => `
-        <li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
-            <img
-                src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=250`, APP_API_URL)}"
-                srcset="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=250`, APP_API_URL)} 250w,
-                        ${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=400`, APP_API_URL)} 400w,
-                        ${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=60&w=600`, APP_API_URL)} 600w"
-                sizes="(max-width: 640px) 128px, 176px"
-                alt="${book.title}"
-                class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]"
-                loading="${index < 4 ? 'eager' : 'lazy'}"
-                width="250"
-                height="333"
-                onerror="this.onerror=null; this.src='../assets/images/placeholder.jpg';"
-                fetchpriority="${index < 2 ? 'high' : 'auto'}"
-            >
-            <div>
-                <h3 class="font-semibold">${book.title}</h3>
-                <p class="text-xs">${book.author}</p>
-            </div>
-            <a href="/book?id=${book.id}" class="absolute inset-0"></a>
-        </li>`
-    ).join('');
+    recommendedBooksContainer.innerHTML = Array.from(books).map(Cards.recommendedBook).join('');
 };
 
 
@@ -68,7 +46,7 @@ const renderAuthors = () => {
 const renderNewReleaseBooks = async () => {
 
     const newReleaseBooksContainer = document.getElementById('new-release');
-    newReleaseBooksContainer.innerHTML = loadingCard({ length: 10 });
+    newReleaseBooksContainer.innerHTML = Cards.skeleton({ length: 10 });
     const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
@@ -76,25 +54,7 @@ const renderNewReleaseBooks = async () => {
             console.error('Error fetching books:', error);
             return [];
         });
-    newReleaseBooksContainer.innerHTML = books.map(book => `
-        <li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
-            <img
-                src="${new URL(`${book.image}?q=60&w=250`, APP_API_URL)}"
-                alt="${book.title}"
-                class="max-sm:h-36 border border-border/10 rounded-lg w-full object-cover aspect-[3/4]"
-                loading="lazy"
-                width="250"
-                height="333"
-                onerror="this.onerror=null; this.src='../assets/images/placeholder.jpg';"
-                fetchpriority="${books.indexOf(book) < 3 ? 'high' : 'auto'}"
-            >
-            <div>
-                <h3 class="font-semibold">${book.title}</h3>
-                <p class="text-xs">${book.author}</p>
-            </div>
-            <a href="/book?id=${book.id}" class="absolute inset-0"></a>
-        </li>
-    `).join('');
+    newReleaseBooksContainer.innerHTML = books.map(Cards.book).join('');
 };
 
 

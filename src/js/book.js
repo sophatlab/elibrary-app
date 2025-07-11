@@ -61,13 +61,13 @@ const bookInitial = async () => {
                                         <i class="fas fa-heart mr-2"></i>Add to Wishlist
                                     </button>
                                     ${book.price && parseFloat(book.price) > 0 ?
-                `<button onclick="purchaseBook('${book.id}')" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
+                                        `<button onclick="purchaseBook('${book.id}')" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
                                             <i class="fas fa-shopping-cart mr-2"></i>Buy Now
                                         </button>` :
-                `<button class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
+                                        `<button class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
                                             <i class="fas fa-download mr-2"></i>Download Sample
                                         </button>`
-            }
+                                    }
                                 </div>
                             </div>
 
