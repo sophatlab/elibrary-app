@@ -5,28 +5,7 @@ import { initializeLayout } from '../components/layout.js';
 import { initializePagination } from '../components/pagination.js';
 import { APP_API_URL } from '../libs/constant.js';
 
-// Set books per page based on screen size
-const getBookPerPage = () => {
-
-    if (window.innerWidth < 640) { // mobile
-        return 8;
-    } else if (window.innerWidth < 1024) { // tablet
-        return 9;
-    } else { // desktop
-        return 12;
-    }
-};
-
-let BOOKS_PER_PAGE = getBookPerPage();
-
-// Update books per page when window resizes
-window.addEventListener('resize', () => {
-    const newBooksPerPage = getBookPerPage();
-    if (newBooksPerPage !== BOOKS_PER_PAGE) {
-        BOOKS_PER_PAGE = newBooksPerPage;
-        initializeBooks(currentPage);
-    }
-});
+let BOOKS_PER_PAGE = 10;
 
 // Global variables to manage request state
 let currentRequest = null;
@@ -55,8 +34,7 @@ const initializeBooks = async (page = 1) => {
 
     // Show loading state
     newReleaseBooksContainer.innerHTML = Cards.skeleton({
-        length: BOOKS_PER_PAGE,
-        className: "shrink-0 w-full aspect-[3/4] sm:w-44 overflow-hidden"
+        length: BOOKS_PER_PAGE
     });
     paginationContainer.innerHTML = '';
 
