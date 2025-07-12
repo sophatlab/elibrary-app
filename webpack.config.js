@@ -27,6 +27,12 @@ const views = [
         title: 'eBooks Library - Book Details'
     },
     {
+        template: './src/pages/authors.html',
+        filename: 'authors/index.html',
+        chunks: ['authors'],
+        title: 'eBooks Library - Authors'
+    },
+    {
         template: './src/pages/404.html',
         filename: '404/index.html',
         chunks: ['404'],
@@ -43,6 +49,7 @@ export default {
         index: './src/js/index.js',
         collection: './src/js/collection.js',
         'collection-book': './src/js/[collection].js',
+        authors: './src/js/authors.js',
         '404': './src/js/404.js'
     },
 
