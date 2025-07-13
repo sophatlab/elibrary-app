@@ -22,8 +22,8 @@ export class Hero {
                         <a href="/collection" class="button button-primary">
                             Browse Collection
                         </a>
-                        <a href="/admin" class="button ring ring-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                            Download Books
+                        <a href="/authors" class="button ring ring-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                            Check Authors
                         </a>
                     </div>
                 </div>
