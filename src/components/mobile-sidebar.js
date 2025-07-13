@@ -24,7 +24,7 @@ export class MobileSidebar {
         // Create sidebar
         this.sidebar = document.createElement('div');
         this.sidebar.id = 'mobile-sidebar';
-        this.sidebar.className = 'fixed top-0 left-0 h-full w-80 max-w-[90vw] bg-background border-r border-border z-50 transform transition-transform duration-300 ease-in-out -translate-x-full';
+        this.sidebar.className = 'fixed top-0 left-0 h-full w-80 max-w-[90vw] bg-background border-r border-border z-[9999] transform transition-transform duration-300 ease-in-out -translate-x-full';
 
         this.sidebar.innerHTML = `
             <div class="flex flex-col h-full overflow-y-auto">
