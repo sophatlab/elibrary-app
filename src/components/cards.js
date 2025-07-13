@@ -15,6 +15,7 @@ export class Cards {
 
 
     static book = (book) => {
+        const authors = book.authors || []
         return (
             `<li>
                 <a href="${linkOriginal(`collection/book?id=${book.id}`)}" class="shrink-0 w-full relative overflow-hidden">
@@ -35,7 +36,7 @@ export class Cards {
                     </div>
                     <div class="my-2">
                         <h3 class="font-semibold">${book.title}</h3>
-                        <p class="text-xs">${book.author}</p>
+                        <p class="text-xs">${authors.map(author => author.name).join(" • ")}</p>
                     </div>
                 </a>
             </li>`
@@ -43,6 +44,7 @@ export class Cards {
     }
 
     static relatedBook = (book) => {
+        const authors = book.authors || []
         return (
             `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
                 <div class="border border-border/10 rounded-lg w-full aspect-[3/4] bg-foreground/10 relative">
@@ -62,7 +64,7 @@ export class Cards {
                 </div>
                 <div class="mb-2">
                     <h3 class="font-semibold">${book.title}</h3>
-                    <p class="text-xs">${book.author}</p>
+                    <p class="text-xs">${authors.map(author => author.name).join(" • ")}</p>
                 </div>
                 <a href="${linkOriginal(`collection/book?id=${book.id}`)}" class="absolute inset-0"></a>
             </li>`
@@ -71,6 +73,7 @@ export class Cards {
 
 
     static recommendedBook = (book, index) => {
+        const authors = book.authors || []
         return (
             `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
                 <img
@@ -87,7 +90,7 @@ export class Cards {
                 >
                 <div>
                     <h3 class="font-semibold">${book.title}</h3>
-                    <p class="text-xs">${book.author}</p>
+                    <p class="text-xs">${authors.map(author => author.name).join(" • ")}</p>
                 </div>
                 <a href="${new URL(`collection/book?id=${book.id}`, location.origin)}" class="absolute inset-0"></a>
             </li>`

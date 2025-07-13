@@ -35,11 +35,11 @@ export class DetailCard {
 
                         <div class="border rounded-2xl max-w-md mx-auto mt-5 border-dashed border-border p-5 flex justify-between gap-5">
                             <div class="flex items-center gap-4">
-                                <div class="flex items-center justify-center gap-0">
+                                <div class="flex items-center justify-center gap-1">
                                     <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-left-laurel-32-3x.d074c7557225d2a0f3f1289a3dde7a7d.png" alt="Book Thumbnail" class="w-7 h-auto">
                                     <div>
                                         <h2 class="text-lg font-semibold text-center">Best</h2>
-                                        <p class="text-sm text-center">Top Sales</p>
+                                        <p class="text-sm text-center">Choice</p>
                                     </div>
                                     <img src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/pdp-shared/components/LaurelItem/ic-system-gf-gold-right-laurel-32-3x.f972b95c999d29e144d9ef970585906d.png" alt="Book Thumbnail" class="w-7 h-auto">
                                 </div>
@@ -81,7 +81,7 @@ export class DetailCard {
 
                         <div class=" border border-dashed border-border p-2 rounded-full flex items-center justify-between">
                             <button type="button" class="button max-lg:w-fit mx-auto w-full button-primary">
-                                $${book.price} Buy now
+                                Download
                             </button>
                         </div>
 
