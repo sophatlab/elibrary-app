@@ -101,7 +101,7 @@ export class Cards {
     static author = (author) => {
         return (
             `<li class="shrink-0">
-                <a href="" class="flex flex-col items-center max-w-28">
+                <a href="${new URL(`authors/profile/?id=${author.id}&name=${author.name}`, location.href)}" class="flex flex-col items-center max-w-28" aria-label="${author.name} author of eBooks">
                     <img
                         src="${imageSource.src(`/api/v1/files/authors/${author.image}`)}"
                         srcset="${imageSource.srcset(`/api/v1/files/authors/${author.image}`)}"
