@@ -76,7 +76,7 @@ export class DetailCard {
                     <div class="max-lg:w-full w-80 flex flex-col gap-2 shrink-0 lg:sticky top-5 max-lg:order-first order-last h-auto">
 
                         <div class="border border-dashed min-h-72 rounded-2xl border-border p-2">
-                            <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=10&w=250`, APP_API_URL)}" alt="Book Thumbnail" class="max-lg:h-96 rounded-xl bg-foreground/5 max-lg:w-auto mx-auto w-full h-auto lg:object-cover">
+                            <img src="${new URL(`${book.image}?q=10&w=250`, APP_API_URL)}" alt="Book Thumbnail" class="max-lg:h-96 rounded-xl bg-foreground/5 max-lg:w-auto mx-auto w-full h-auto lg:object-cover">
                         </div>
 
                         <div class=" border border-dashed border-border p-2 rounded-full flex items-center justify-between">
@@ -86,10 +86,12 @@ export class DetailCard {
                         </div>
 
                         <div class="flex border border-dashed border-border rounded-full p-2 items-center justify-between">
-                            <a href="#" class="flex items-center">
-                                <img src="${new URL(`/api/v1/files/thumbnails/${book.cover_image_url}?q=10&w=38`, APP_API_URL)}" alt="Book Cover" class="size-9 object-cover rounded-full mr-4">
-                                <p class="text-foreground/70 hover:text-primary"> ${book.author} </p>
-                            </a>
+                            ${book.authors.map(author => `
+                                <a href="${new URL(`authors/profile?id=${author.id}&name=${author.name}`, location.origin)}" class="flex items-center">
+                                    <img src="${new URL(`/api/v1/files/authors/${author.image}?q=10&w=38`, APP_API_URL)}" alt="Book Cover" class="size-9 object-cover rounded-full mr-4">
+                                    <p class="text-foreground/70 hover:text-primary"> ${author.name} </p>
+                                </a>`
+                            ).join('')}
                         </div>
 
                         <ul class="flex flex-col border rounded-2xl border-dashed border-border p-2 items-start justify-between">

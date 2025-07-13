@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="Browse our extensive catalog of books - fiction, non-fiction, academic, and more">
+</head>
+<body>
+
+    <header class="header">
+        <!-- Handle by JS -->
+    </header>
+
+    <div class="flex mx-auto items-start w-full">
+        <main class="w-full max-sm:p-0 p-4 main">
+            <section class="my-5 px-4" id="breadcrumb">
+                <nav aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2 text-sm text-foreground/70">
+                        <li>
+                            <a href="/" class="hover:text-primary transition-colors">Home</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <a href="/authors" class="hover:text-primary transition-colors">Authors</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <span class="text-foreground font-medium" id="current-collection">Current</span>
+                        </li>
+                    </ol>
+                </nav>
+            </section>
+
+            <section class="my-5" id="author-profile">
+                <div class="h-96 w-full relative bg-gradient-to-b from-foreground/5 to-transparent border-x border-t border-dashed border-border rounded-2xl mb-5">
+                    <div class="size-10 z-40 bg-foreground/20 rounded-full animate-pulse absolute top-5 right-5"></div>
+                    <div class="absolute max-sm:flex-col flex gap-5 -bottom-24 left-5">
+                        <!-- Avatar skeleton -->
+                        <div class="max-sm:size-32 size-48 rounded-full bg-background relative">
+                            <div class="absolute inset-0 bg-foreground/20 animate-pulse rounded-full"></div>
+                        </div>
+                        <!-- Content skeleton -->
+                        <div class="translate-y-2 space-y-3">
+                            <!-- Name skeleton -->
+                            <div class="h-10 w-48 bg-foreground/10 animate-pulse rounded-lg"></div>
+                            <!-- Description skeleton -->
+                            <div class="h-5 w-64 bg-foreground/10 animate-pulse rounded-md"></div>
+                            <!-- Stats skeleton -->
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="size-6 bg-foreground/10 animate-pulse rounded"></div>
+                                    <div class="h-4 w-16 bg-foreground/10 animate-pulse rounded"></div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="size-6 bg-foreground/10 animate-pulse rounded"></div>
+                                    <div class="h-4 w-28 bg-foreground/10 animate-pulse rounded"></div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="size-6 bg-foreground/10 animate-pulse rounded"></div>
+                                    <div class="h-4 w-20 bg-foreground/10 animate-pulse rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- <div class="h-96 w-full translate-y-24 relative bg-gradient-to-b from-primary to-transparent animate-pulse rounded-2xl mb-5">
+
+            </div> -->
+
+
+        </main>
+    </div>
+</body>
+</html>

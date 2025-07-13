@@ -28,7 +28,7 @@ const initializeAuthors = async () => {
                     ${Icons.glob("size-6")}
                 </a>
             </div>
-            <a href="${new URL(`authors?id=${author.id}&name=${author.name}`, location.origin)}" class="button button-primary px-4 absolute top-6 right-6">
+            <a href="${new URL(`authors/profile?id=${author.id}?name=${author.name}`, location.origin)}" class="button button-primary px-4 absolute top-6 right-6">
                 View
             </a>
         </li>
