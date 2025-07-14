@@ -1,5 +1,6 @@
 export const APP_NAME = 'eBooks';
 export const APP_API_URL = 'https://api.sophat.top';
+export const APP_DESCRIPTION = 'A digital library for eBooks and resources';
 
 export const imageSource = {
     src: (path, options) => {

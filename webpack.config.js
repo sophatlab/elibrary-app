@@ -3,10 +3,15 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { fileURLToPath } from 'url';
-import { APP_NAME } from './src/libs/constant.js';
+import { APP_DESCRIPTION, APP_NAME } from './src/libs/constant.js';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
+import { icons, screenshots } from './src/libs/web-manifest.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const src = path.resolve(__dirname, "src")
 
 const views = [
     {
@@ -70,7 +75,7 @@ export default {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].[contenthash].js',
+        filename: 'js/[name].js',
         clean: true
     },
 
@@ -88,14 +93,14 @@ export default {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'images/[name].[hash][ext]'
+                    filename: 'images/[name][ext]'
                 }
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'fonts/[name].[hash][ext]'
+                    filename: 'fonts/[name][ext]'
                 }
             }
         ]
@@ -105,8 +110,27 @@ export default {
         new CleanWebpackPlugin(),
 
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash].css'
+            filename: 'css/[name].css'
         }),
+
+        new WebpackManifestPlugin({
+            fileName: 'mainfest.json',
+            publicPath: '/'
+        }),
+
+        new WebpackPwaManifest({
+            publicPath: '/',
+            name: APP_NAME,
+            short_name: APP_NAME,
+            description: APP_DESCRIPTION,
+            start_url: "/",
+            background_color: "#ffffff",
+            theme_color: "#ffffff",
+            crossorigin: 'use-credentials',
+            icons: [].concat(icons(src)),
+            screenshots: [].concat(screenshots),
+            filename: "site.webmanifest"
+        })
 
     ].concat(
         views.map(view => new HtmlWebpackPlugin({
