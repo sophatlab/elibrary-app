@@ -120,7 +120,6 @@ export default {
                 { from: /^\/$/, to: '/index.html' },
                 { from: /^\/collection$/, to: '/collection/index.html' },
                 { from: /^\/collection\/book/, to: '/collection/book/index.html' },
-                { from: /^\/admin/, to: '/admin.html' },
                 { from: /^\/authors$/, to: '/authors/index.html' },
                 { from: /^\/authors\/profile/, to: '/authors/profile/index.html' },
                 { from: /./, to: '/404/index.html' }  // Catch-all for 404
