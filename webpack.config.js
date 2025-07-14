@@ -27,6 +27,18 @@ const views = [
         title: 'eBooks Library - Book Details'
     },
     {
+        template: './src/pages/authors.html',
+        filename: 'authors/index.html',
+        chunks: ['authors'],
+        title: 'eBooks Library - Authors'
+    },
+    {
+        template: './src/pages/[authors].html',
+        filename: 'authors/profile/index.html',
+        chunks: ['author-profile'],
+        title: 'eBooks Library - Author Details'
+    },
+    {
         template: './src/pages/404.html',
         filename: '404/index.html',
         chunks: ['404'],
@@ -43,6 +55,8 @@ export default {
         index: './src/js/index.js',
         collection: './src/js/collection.js',
         'collection-book': './src/js/[collection].js',
+        authors: './src/js/authors.js',
+        'author-profile': './src/js/[authors].js',
         '404': './src/js/404.js'
     },
 
@@ -107,6 +121,8 @@ export default {
                 { from: /^\/collection$/, to: '/collection/index.html' },
                 { from: /^\/collection\/book/, to: '/collection/book/index.html' },
                 { from: /^\/admin/, to: '/admin.html' },
+                { from: /^\/authors$/, to: '/authors/index.html' },
+                { from: /^\/authors\/profile/, to: '/authors/profile/index.html' },
                 { from: /./, to: '/404/index.html' }  // Catch-all for 404
             ]
         }

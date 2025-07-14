@@ -102,7 +102,7 @@
 @layer components {
 
     .header {
-        @apply border-b border-dashed px-4 sticky top-0 bg-background/50 backdrop-blur-2xl z-50 border-border mx-auto flex items-center justify-between;
+        @apply border-b border-dashed px-4 sticky z-[999] top-0 bg-background/50 backdrop-blur-2xl border-border mx-auto flex items-center justify-between;
     }
 
     .logo {

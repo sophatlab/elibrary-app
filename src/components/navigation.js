@@ -71,13 +71,13 @@ export class Navigation {
             url: "collection",
             icon: Icons.collection()
         },
-        // {
-        //     id: 3,
-        //     title: "Helps",
-        //     isActive: false,
-        //     url: "/help",
-        //     icon: Icons.help()
-        // },
+        {
+            id: 3,
+            title: "Authors",
+            isActive: false,
+            url: "/authors",
+            icon: Icons.help()
+        },
     ]
 
     initializeMobileSidebar() {

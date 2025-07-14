@@ -16,6 +16,10 @@ const bookInitial = async () => {
         return;
     }
 
+    const bookDetail = document.getElementById('book-detail');
+    bookDetail.innerHTML = DetailCard.skeleton({
+        length: 1,
+    });
 
     const book = await fetch(new URL(`/api/v1/ebooks/${bookId}`, APP_API_URL))
         .then(response => response.json())
@@ -24,8 +28,6 @@ const bookInitial = async () => {
             console.error('Error fetching book:', error);
             return {};
         });
-
-    const bookDetail = document.getElementById('book-detail');
 
     if (book && book.id) {
         bookDetail.innerHTML = DetailCard.bookSection(book);
@@ -83,8 +85,8 @@ const initializeRelatedBooks = async (page = 1) => {
 
     // Show loading state
     relatedBooksContainer.innerHTML = Cards.skeleton({
-        length: RELATED_BOOKS_PER_PAGE,
-        className: "shrink-0 w-full aspect-[3/4] sm:w-44 overflow-hidden"
+        length: 7,
+        className: "shrink-0 w-full aspect-[3/4] sm:w-[7.9rem] overflow-hidden"
     });
     paginationContainer.innerHTML = '';
 

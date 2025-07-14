@@ -7,7 +7,10 @@ const renderRecommendedBooks = async () => {
 
     const recommendedBooksContainer = document.getElementById('recommended-books');
     // set loading state
-    recommendedBooksContainer.innerHTML = Cards.skeleton({ length: 10 });
+    recommendedBooksContainer.innerHTML = Cards.skeleton({
+        length: 10,
+        className: "shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded"
+    });
     const books = await fetch(new URL(`/api/v1/recommendations/trending`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
@@ -22,6 +25,10 @@ const renderRecommendedBooks = async () => {
 
 const renderAuthors = async () => {
     const authorsContainer = document.getElementById('authors');
+
+    // Set loading state
+    authorsContainer.innerHTML = Cards.authorSkeleton({ length: 5 });
+
     const authors = await fetch(new URL(`/api/v1/authors`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
@@ -37,7 +44,7 @@ const renderAuthors = async () => {
 const renderNewReleaseBooks = async () => {
     const newReleaseBooksContainer = document.getElementById('new-release');
     newReleaseBooksContainer.innerHTML = Cards.skeleton({ length: 10 });
-    const books = await fetch(new URL(`/api/v1/ebooks`, APP_API_URL))
+    const books = await fetch(new URL(`/api/v1/ebooks?limit=5`, APP_API_URL))
         .then(response => response.json())
         .then(data => data.result)
         .catch(error => {
