@@ -1,4 +1,4 @@
-import { cn } from "../libs/tailwind.js";
+import { cn } from "../libs/utils.js";
 
 export class Icons {
     static home = className => (

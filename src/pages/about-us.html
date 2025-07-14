@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <meta name="description" content="Welcome to eLibrary - Your digital library for discovering and reading books online">
+</head>
+
+<body>
+
+    <header class="header">
+        <!-- Handle by JS -->
+    </header>
+
+    <main class="min-h-screen">
+        <h1 class="text-3xl main font-bold mt-7">About This Project</h1>
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-4">Purpose</h2>
+            <p class="my-5">
+                This project serves as an educational assignment for Year II, Semester II, Batch 23 students at Cambodian University for Specialties, designed to demonstrate:
+            </p>
+            <ul class="list-disc pl-5 mt-2">
+                <li>Modern web development techniques using JavaScript ES6+</li>
+                <li>Component-based architecture for scalable applications</li>
+                <li>Responsive design implementation with Tailwind CSS</li>
+                <li>API integration and asynchronous data handling</li>
+                <li>Build system configuration with Webpack</li>
+                <li>Version control and project organization</li>
+            </ul>
+            <p class="my-5">
+                The eLibrary App provides a practical platform for applying these concepts in a real-world application context.
+            </p>
+        </section>
+
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-5">Team Members</h2>
+            <ul class="list-disc pl-5 mt-2">
+                <li>
+                    <a href="https://pphat.top" class="text-primary underline">Sophat LEAT</a> - Project Lead &amp; Developer
+                </li>
+            </ul>
+        </section>
+
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-5">Features</h2>
+            <div>
+                <h3 class="text-xl font-semibold mt-6">Core Library Features</h3>
+                <ul class="list-disc pl-5 mt-2">
+                    <li>Multi-page Architecture: Separate pages for Home, Collection, Authors, Book Details, and About</li>
+                    <li>Book Catalog: Browse extensive book collections with advanced filtering and pagination</li>
+                    <li>Author Profiles: Dedicated author pages with biographical information and book collections</li>
+                    <li>Book Details: Comprehensive book information with related recommendations</li>
+                    <li>Advanced Search: Global search functionality with modal interface and real-time results</li>
+                    <li>Category Filtering: Dynamic category tabs for organizing book collections</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mt-6">User Experience</h3>
+                <ul class="list-disc pl-5 mt-2">
+                    <li>Responsive Design: Built with Tailwind CSS v4 for seamless mobile-first experience</li>
+                    <li>Dark/Light Theme: System-aware theme toggle with localStorage persistence</li>
+                    <li>Loading Skeletons: Smooth loading states for better perceived performance</li>
+                    <li>Image Optimization: Responsive images with srcset, lazy loading, and error fallbacks</li>
+                    <li>Breadcrumb Navigation: Clear navigation hierarchy across all pages</li>
+                    <li>404 Error Handling: Custom error pages for better user experience</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mt-6">Technical Features</h3>
+                <ul class="list-disc pl-5 mt-2">
+                    <li>Modern JavaScript: ES6 modules with component-based architecture</li>
+                    <li>API Integration: Connected to external API (<a href="https://api.sophat.top" class="text-primary underline">https://api.sophat.top</a>) with error handling</li>
+                    <li>Modern Build System: Webpack with hot module replacement and code splitting</li>
+                    <li>Asset Management: Automatic handling of images, fonts, and CSS with content hashing</li>
+                    <li>Component System: Reusable card components with skeleton loading states</li>
+                    <li>Performance Optimization: Image optimization, lazy loading, and efficient rendering</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-8">Performance Optimization</h2>
+            <ul class="list-disc pl-5 mt-2">
+                <li>Image Optimization: Responsive images with srcset, lazy loading, and WebP support</li>
+                <li>Loading Skeletons: Card and author skeletons for smooth loading experience</li>
+                <li>Code Splitting: Separate bundles for each page to reduce initial load time</li>
+                <li>Asset Optimization: Content hashing for cache busting and long-term caching</li>
+                <li>Bundle Analysis: Vendor and common chunk separation for optimal caching</li>
+                <li>Hot Module Replacement: Instant updates during development</li>
+            </ul>
+        </section>
+
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-8">Accessibility Features</h2>
+            <ul class="list-disc pl-5 mt-2">
+                <li>Semantic HTML: Proper HTML5 semantic elements throughout</li>
+                <li>ARIA Labels: Comprehensive aria-label attributes for screen readers</li>
+                <li>Keyboard Navigation: Full keyboard accessibility support</li>
+                <li>Alt Text: Descriptive alt text for all images</li>
+                <li>Focus Management: Proper focus indicators and management</li>
+                <li>Color Contrast: Accessible color combinations in both themes</li>
+            </ul>
+        </section>
+
+        <section class="main flex-1 p-4 mx-auto">
+            <h2 class="text-2xl font-bold mt-8">Pages</h2>
+            <ul class="list-disc pl-5 mt-2">
+                <li><strong>Home Page</strong> (<code>/</code>) - Landing page with hero section and featured books</li>
+                <li><strong>Collection Page</strong> (<code>/collection/</code>) - Browse and search books catalog with category filtering</li>
+                <li><strong>Book Details Page</strong> (<code>/collection/book/</code>) - Detailed view of individual books with related recommendations</li>
+                <li><strong>Authors Page</strong> (<code>/authors/</code>) - Browse author profiles and their collections</li>
+                <li><strong>Author Profile Page</strong> (<code>/authors/profile/</code>) - Individual author pages with biography and books</li>
+                <li><strong>About Page</strong> (<code>/about-us/</code>) - Information about the project, team, and features</li>
+                <li><strong>404 Page</strong> (<code>/404/</code>) - Custom error page for not found resources</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="border-t bg-primary/5 border-dashed border-primary py-5">
+        <section id="footer-section" class="main"></section>
+    </footer>
+</body>
+
+</html>

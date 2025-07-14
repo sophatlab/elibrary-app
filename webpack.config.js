@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { fileURLToPath } from 'url';
+import { APP_NAME } from './src/libs/constant.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,37 +13,43 @@ const views = [
         template: './src/pages/index.html',
         filename: 'index.html',
         chunks: ['index'],
-        title: 'eBooks Library - Home'
+        title: `${APP_NAME} - Home`
     },
     {
         template: './src/pages/collection.html',
         filename: 'collection/index.html',
         chunks: ['collection'],
-        title: 'eBooks Library - Collection'
+        title: `${APP_NAME} - Collection`
     },
     {
         template: './src/pages/[collection].html',
         filename: 'collection/book/index.html',
         chunks: ['collection-book'],
-        title: 'eBooks Library - Book Details'
+        title: `${APP_NAME} - Book Details`
     },
     {
         template: './src/pages/authors.html',
         filename: 'authors/index.html',
         chunks: ['authors'],
-        title: 'eBooks Library - Authors'
+        title: `${APP_NAME} - Authors`
     },
     {
         template: './src/pages/[authors].html',
         filename: 'authors/profile/index.html',
         chunks: ['author-profile'],
-        title: 'eBooks Library - Author Details'
+        title: `${APP_NAME} - Author Details`
+    },
+    {
+        template: './src/pages/about-us.html',
+        filename: 'about-us/index.html',
+        chunks: ['about-us'],
+        title: `${APP_NAME} - About Us`
     },
     {
         template: './src/pages/404.html',
         filename: '404/index.html',
         chunks: ['404'],
-        title: 'eLibrary - Page Not Found'
+        title: `${APP_NAME} - Page Not Found`
     }
 ]
 
@@ -57,6 +64,7 @@ export default {
         'collection-book': './src/js/[collection].js',
         authors: './src/js/authors.js',
         'author-profile': './src/js/[authors].js',
+        'about-us': './src/js/about-us.js',
         '404': './src/js/404.js'
     },
 
@@ -122,6 +130,7 @@ export default {
                 { from: /^\/collection\/book/, to: '/collection/book/index.html' },
                 { from: /^\/authors$/, to: '/authors/index.html' },
                 { from: /^\/authors\/profile/, to: '/authors/profile/index.html' },
+                { from: /^\/about-us$/, to: '/authors/about-us/index.html' },
                 { from: /./, to: '/404/index.html' }  // Catch-all for 404
             ]
         }

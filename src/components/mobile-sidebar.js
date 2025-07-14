@@ -1,4 +1,4 @@
-import { cn } from '../libs/tailwind.js';
+import { cn } from '../libs/utils.js';
 import { Icons } from './icons.js';
 
 export class MobileSidebar {

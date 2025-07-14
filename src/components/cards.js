@@ -1,5 +1,5 @@
 import { imageSource, linkOriginal } from "../libs/constant.js"
-import { cn } from "../libs/tailwind.js"
+import { cn } from "../libs/utils.js"
 
 export class Cards {
 

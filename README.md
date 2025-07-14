@@ -4,16 +4,20 @@ A modern multi-page eLibrary application built with Webpack, JavaScript ES6 modu
 
 ## Purpose
 
-This project serves as an educational assignment for Year II, Semester II, Batch 23 students at Cambodian University for Specialties, designed to demonstrate:
+This project is a modern, full-featured eLibrary web application built for educational purposes at Cambodian University for Specialties (Year II, Semester II, Batch 23). It demonstrates:
 
-- Modern web development techniques using JavaScript ES6+
-- Component-based architecture for scalable applications
-- Responsive design implementation with Tailwind CSS
-- API integration and asynchronous data handling
-- Build system configuration with Webpack
+- Multi-page architecture: Home, Collection, Authors, Book Details, About, and 404 Error pages
+- Advanced book catalog and author profile management
+- Component-based architecture for scalable and maintainable code
+- Responsive design with Tailwind CSS v4
+- Dark/Light theme toggle with system preference and localStorage persistence
+- API integration for dynamic data and asynchronous handling
+- Loading skeletons and image optimization (srcset, lazy loading, WebP)
+- Accessibility features: semantic HTML, ARIA labels, keyboard navigation, color contrast
+- Modern build system with Webpack (HMR, code splitting, asset management)
 - Version control and project organization
 
-The eLibrary App provides a practical platform for applying these concepts in a real-world application context.
+The eLibrary App provides a practical platform for applying these concepts in a real-world, production-grade application context.
 
 
 ## Team Members
@@ -23,7 +27,7 @@ The eLibrary App provides a practical platform for applying these concepts in a 
 ## Features
 
 ### 📚 Core Library Features
-- **Multi-page Architecture**: Separate pages for Home, Collection, Authors, Book Details, and Admin Panel
+- **Multi-page Architecture**: Separate pages for Home, Collection, Authors, Book Details, and About
 - **Book Catalog**: Browse extensive book collections with advanced filtering and pagination
 - **Author Profiles**: Dedicated author pages with biographical information and book collections
 - **Book Details**: Comprehensive book information with related recommendations
@@ -46,10 +50,6 @@ The eLibrary App provides a practical platform for applying these concepts in a 
 - **Component System**: Reusable card components with skeleton loading states
 - **Performance Optimization**: Image optimization, lazy loading, and efficient rendering
 
-### 👨‍💼 Admin Features
-- **Admin Panel**: Administrative interface for managing books and collections
-- **Content Management**: Tools for managing library content and metadata
-
 ## Pages
 
 1. **Home Page** (`/`) - Landing page with hero section and featured books
@@ -57,7 +57,7 @@ The eLibrary App provides a practical platform for applying these concepts in a 
 3. **Book Details Page** (`/collection/book/`) - Detailed view of individual books with related recommendations
 4. **Authors Page** (`/authors/`) - Browse author profiles and their collections
 5. **Author Profile Page** (`/authors/profile/`) - Individual author pages with biography and books
-6. **Admin Panel** (`/admin/`) - Administrative interface for managing books
+6. **About Page** (`/about-us/`) - Information about the project, team, and features
 7. **404 Page** (`/404/`) - Custom error page for not found resources
 
 ## Project Structure
@@ -71,10 +71,8 @@ elibrary-app/
 │   │   ├── [collection].js     # Book details page
 │   │   ├── authors.js          # Authors listing page
 │   │   ├── [authors].js        # Author profile page
-│   │   ├── admin.js            # Admin panel
 │   │   └── 404.js              # Error page
 │   ├── components/             # Reusable components
-│   │   ├── admin.js            # Admin panel functionality
 │   │   ├── cards.js            # Book & author card components with skeletons
 │   │   ├── category-tab.js     # Category filtering tabs
 │   │   ├── detail-card.js      # Book detail card component
@@ -92,7 +90,7 @@ elibrary-app/
 │   │   ├── [collection].html   # Book details page
 │   │   ├── authors.html        # Authors listing page
 │   │   ├── [authors].html      # Author profile page
-│   │   ├── admin.html          # Admin panel
+│   │   ├── about-us.html       # About page
 │   │   └── 404.html            # Error page
 │   ├── assets/                 # Static assets
 │   │   ├── badges/             # Badge images
@@ -102,7 +100,7 @@ elibrary-app/
 │   │       └── home-cover.png  # Homepage hero cover
 │   ├── libs/                   # Utility libraries
 │   │   ├── constant.js         # API configuration & image optimization
-│   │   └── tailwind.js         # Tailwind utility functions (cn helper)
+│   │   └── utils.js            # Tailwind utility functions (cn helper)
 │   └── style/
 │       └── main.css            # Tailwind CSS v4 with custom styles
 ├── dist/                       # Built files (generated)

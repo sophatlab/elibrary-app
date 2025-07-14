@@ -1,4 +1,4 @@
-import { cn } from '../libs/tailwind.js';
+import { cn } from '../libs/utils.js';
 import { Icons } from './icons.js';
 import { Search } from './search.js';
 import { MobileSidebar } from './mobile-sidebar.js';
@@ -78,13 +78,13 @@ export class Navigation {
             url: "/authors",
             icon: Icons.authors()
         },
-        // {
-        //     id: 4,
-        //     title: "About Us",
-        //     isActive: false,
-        //     url: "/about",
-        //     icon: Icons.help()
-        // },
+        {
+            id: 4,
+            title: "About Us",
+            isActive: false,
+            url: "/about-us",
+            icon: Icons.help()
+        },
     ]
 
     initializeMobileSidebar() {
