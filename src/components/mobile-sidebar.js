@@ -19,7 +19,7 @@ export class MobileSidebar {
         // Create overlay
         this.overlay = document.createElement('div');
         this.overlay.id = 'mobile-sidebar-overlay';
-        this.overlay.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none';
+        this.overlay.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-[999] transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none';
 
         // Create sidebar
         this.sidebar = document.createElement('div');

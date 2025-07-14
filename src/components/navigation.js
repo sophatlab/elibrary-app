@@ -17,7 +17,7 @@ export class Navigation {
     logo() {
         return (`
             <div class="logo">
-                <a href="/" class="max-md:hidden inline-flex items-center gap-2" aria-label="eBooks Home">
+                <a href="/" class="max-lg:hidden inline-flex items-center gap-2" aria-label="eBooks Home">
                     <svg class="size-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M5 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
                         <path d="M9 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
@@ -30,7 +30,7 @@ export class Navigation {
                     <span class="sr-only">eBooks Library Logo</span>
                 </a>
 
-                <button type="button" class="border p-1.5 rounded-xl md:hidden border-dashed border-border" aria-label="Toggle Navigation Menu" id="burger-menu">
+                <button type="button" class="border p-1.5 rounded-xl lg:hidden border-dashed border-border" aria-label="Toggle Navigation Menu" id="burger-menu">
                     ${Icons.burger("size-6")}
                 </button>
                 <span class="max-sm:hidden text-2xl" aria-hidden="true">eBooks</span>
@@ -76,8 +76,15 @@ export class Navigation {
             title: "Authors",
             isActive: false,
             url: "/authors",
-            icon: Icons.help()
+            icon: Icons.authors()
         },
+        // {
+        //     id: 4,
+        //     title: "About Us",
+        //     isActive: false,
+        //     url: "/about",
+        //     icon: Icons.help()
+        // },
     ]
 
     initializeMobileSidebar() {
@@ -160,7 +167,7 @@ export class Navigation {
 
     renderModule() {
         const container = document.createElement('ol')
-        container.classList = "flex items-center p-4 gap-2 max-md:hidden";
+        container.classList = "flex items-center p-4 gap-2 max-lg:hidden";
         const sidebarContent = this.modules.map(item => {
             // Check if this item should be active based on current URL
             const isActive = this.isUrlActive(item.url);
