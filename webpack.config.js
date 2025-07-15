@@ -7,6 +7,7 @@ import { APP_DESCRIPTION, APP_NAME } from './src/libs/constant.js';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import { icons, screenshots } from './src/libs/web-manifest.js';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -127,8 +128,8 @@ export default {
             background_color: "#ffffff",
             theme_color: "#ffffff",
             crossorigin: 'use-credentials',
-            icons: [].concat(icons(src)),
-            screenshots: [].concat(screenshots),
+            icons: icons,
+            screenshots: screenshots,
             filename: "site.webmanifest"
         })
 
@@ -138,7 +139,31 @@ export default {
             filename: view.filename,
             chunks: view.chunks,
             title: view.title,
-        }))
+            meta: {
+                'apple-mobile-web-app-capable': 'yes',
+                'apple-mobile-web-app-status-bar-style': 'black-translucent'
+            },
+            inject: 'body',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            }
+        })),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(src, 'assets'), to: 'assets' },
+                // { from: path.resolve(src, 'favicon.ico'), to: '' },
+                // { from: path.resolve(src, 'robots.txt'), to: '' }
+            ]
+        })
     ),
 
     devServer: {
