@@ -3,10 +3,10 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { fileURLToPath } from 'url';
-import { APP_DESCRIPTION, APP_NAME } from './src/libs/constant.js';
+import { APP_NAME, APP_DESCRIPTION } from './src/libs/constant.js'; // Removed APP_DESCRIPTION
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import WebpackPwaManifest from 'webpack-pwa-manifest';
-import { icons, screenshots } from './src/libs/web-manifest.js';
+import WebpackPwaManifest from 'webpack-pwa-manifest'; // Removed unused import
+import { screenshots } from './src/libs/web-manifest.js'; // Removed unused imports
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 
@@ -103,6 +103,13 @@ export default {
                 generator: {
                     filename: 'fonts/[name][ext]'
                 }
+            },
+            {
+                test: /\.(png|ico)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/icons/[name][ext]'
+                }
             }
         ]
     },
@@ -128,7 +135,44 @@ export default {
             background_color: "#ffffff",
             theme_color: "#ffffff",
             crossorigin: 'use-credentials',
-            icons: icons,
+            icons: [
+                {
+                    src: path.resolve(src, 'assets/icons/android-chrome-512x512.png'),
+                    sizes: [512],
+                    type: "image/png",
+                    purpose: "any maskable"
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/android-chrome-192x192.png'),
+                    sizes: [192],
+                    type: "image/png",
+                    purpose: "any maskable"
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/apple-touch-icon.png'),
+                    sizes: [180],
+                    type: "image/png",
+                    purpose: "any maskable"
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/favicon.ico'),
+                    sizes: [48],
+                    type: "image/x-icon",
+                    purpose: "any maskable"
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/favicon-32x32.png'),
+                    sizes: [32],
+                    type: "image/png",
+                    purpose: "any maskable"
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/favicon-16x16.png'),
+                    sizes: [16],
+                    type: "image/png",
+                    purpose: "any maskable"
+                }
+            ],
             screenshots: screenshots,
             filename: "site.webmanifest"
         })
@@ -140,21 +184,16 @@ export default {
             chunks: view.chunks,
             title: view.title,
             meta: {
-                'apple-mobile-web-app-capable': 'yes',
-                'apple-mobile-web-app-status-bar-style': 'black-translucent'
+                robots: { name: 'robots', content: 'index, follow' },
+                themeColor: { name: 'theme-color', content: '#ffffff' },
+                appleMobileWebAppCapable: { name: 'apple-mobile-web-app-capable', content: 'yes' },
+                appleMobileWebAppStatusBarStyle: { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+                msapplicationTileColor: { name: 'msapplication-TileColor', content: '#ffffff' },
+                msapplicationConfig: { name: 'msapplication-config', content: '/browserconfig.xml' }
             },
             inject: 'body',
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true
+            templateParameters: {
+                domain: 'https://ebooks.sophat.top'
             }
         })),
         new CopyWebpackPlugin({
@@ -197,9 +236,14 @@ export default {
                 common: {
                     minChunks: 2,
                     chunks: 'all',
-                    name: 'common'
+                    name: 'app'
                 }
             }
         }
+    },
+    performance: {
+        hints: 'warning', // 'error' | 'warning' | false
+        maxAssetSize: 2 * 1024 * 1024, // 2 MiB, adjust as needed
+        maxEntrypointSize: 2 * 1024 * 1024, // 2 MiB, adjust as needed
     }
 };

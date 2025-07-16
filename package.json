@@ -4,10 +4,19 @@
     "description": "A simple eLibrary application",
     "main": "index.js",
     "type": "module",
+    "size-limit": [
+        {
+            "path": "./dist/**/*.js",
+            "limit": "30 kB"
+        }
+    ],
     "scripts": {
         "dev": "webpack serve --mode development",
-        "build": "webpack --mode production",
-        "start": "http-server dist -p 8080"
+        "styles": "tailwindcss -i ./src/style/main.css -o ./dist/css/app.css --minify",
+        "image-min": "imagemin ./src/images/* --out-dir=./dist/images",
+        "build": "webpack --mode production && npm run styles && npm run image-min && npm run filesize",
+        "filesize": "npx size-limit",
+        "start": "http-server ./dist -p 3000"
     },
     "dependencies": {
         "@tailwindcss/postcss": "^4.1.11",
@@ -15,6 +24,8 @@
         "http-server": "^14.1.1",
         "image-minimizer-webpack-plugin": "^4.1.3",
         "imagemin": "^9.0.1",
+        "imagemin-jpegtran": "^8.0.0",
+        "imagemin-pngquant": "^10.0.0",
         "postcss": "^8.5.6",
         "tailwind-merge": "^3.3.1",
         "tailwindcss": "^4.1.11",
@@ -22,15 +33,15 @@
         "webpack-pwa-manifest": "^4.3.0"
     },
     "devDependencies": {
+        "@size-limit/preset-app": "^11.2.0",
+        "@size-limit/preset-big-lib": "^11.2.0",
+        "@size-limit/preset-small-lib": "^11.2.0",
         "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^7.1.2",
         "html-webpack-plugin": "^5.6.3",
-        "imagemin-gifsicle": "^7.0.0",
-        "imagemin-jpegtran": "^8.0.0",
-        "imagemin-optipng": "^8.0.0",
-        "imagemin-svgo": "^11.0.1",
         "mini-css-extract-plugin": "^2.9.2",
         "postcss-loader": "^8.1.1",
+        "size-limit": "^11.2.0",
         "style-loader": "^4.0.0",
         "webpack": "^5.99.9",
         "webpack-cli": "^6.0.1",
