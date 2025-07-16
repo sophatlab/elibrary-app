@@ -192,9 +192,7 @@ export default {
                 msapplicationConfig: { name: 'msapplication-config', content: '/browserconfig.xml' }
             },
             inject: 'body',
-            templateParameters: {
-                domain: 'https://ebooks.sophat.top'
-            }
+            domain: 'https://ebooks.sophat.top'
         })),
         new CopyWebpackPlugin({
             patterns: [
