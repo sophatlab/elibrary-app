@@ -18,13 +18,15 @@ export class Cards {
         const authors = book.authors || []
         return (
             `<li>
-                <a href="${linkOriginal(`collection/book?id=${book.id}`)}" class="shrink-0 w-full relative overflow-hidden">
+                <a href="${linkOriginal(`collection/book?id=${book.id}`)}"
+                    class="shrink-0 w-full relative overflow-hidden"
+                    aria-label="View details for ${book.title} by ${authors.map(author => author.name).join(', ')}">
                     <div class="border border-border/10 rounded w-full aspect-[3/4] bg-foreground/10 relative">
                         <img
                             src="${imageSource.src(book.image)}"
                             srcset="${imageSource.srcset(book.image)}"
                             sizes="(max-width: 640px) 100vw, 176px"
-                            alt="${book.title}"
+                            alt="${book.title} cover"
                             loading="lazy"
                             width="250"
                             height="333"
@@ -67,7 +69,7 @@ export class Cards {
                     <p class="text-xs">${authors.map(author => author.name).join(" • ")}</p>
                 </div>
                 <a href="${linkOriginal(`collection/book?id=${book.id}`)}"
-                    aria-label="View details of ${book.title} by ${book.author}"
+                    aria-label="View details for ${book.title} by ${authors.map(author => author.name).join(', ')}"
                     class="absolute inset-0"></a>
             </li>`
         )
@@ -79,10 +81,10 @@ export class Cards {
         return (
             `<li class="shrink-0 relative w-32 @sm:w-44 overflow-hidden rounded">
                 <img
-                    src="${imageSource.src(`/api/v1/files/thumbnails/${book.cover_image_url || book.image}`)}"
+                    src="${imageSource.src(`/api/v1/files/thumbnails/${book.cover_image_url || book.image}`, { q: 60, w: 100 })}"
                     srcset="${imageSource.srcset(`/api/v1/files/thumbnails/${book.cover_image_url || book.image}`)}"
                     sizes="(max-width: 640px) 128px, 176px"
-                    alt="${book.title}"
+                    alt="${book.title} cover"
                     loading="${index < 4 ? 'eager' : 'lazy'}"
                     width="250"
                     height="333"
@@ -94,7 +96,9 @@ export class Cards {
                     <h3 class="font-semibold">${book.title}</h3>
                     <p class="text-xs">${authors.map(author => author.name).join(" • ")}</p>
                 </div>
-                <a href="${new URL(`collection/book?id=${book.id}`, location.origin)}" class="absolute inset-0"></a>
+                <a href="${new URL(`collection/book?id=${book.id}`, location.origin)}"
+                    aria-label="View details for ${book.title} by ${authors.map(author => author.name).join(', ')}"
+                    class="absolute inset-0"></a>
             </li>`
         )
     }

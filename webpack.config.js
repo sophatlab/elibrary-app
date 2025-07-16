@@ -140,37 +140,37 @@ export default {
                     src: path.resolve(src, 'assets/icons/android-chrome-512x512.png'),
                     sizes: [512],
                     type: "image/png",
-                    purpose: "any maskable"
+                    purpose: "maskable"
                 },
                 {
                     src: path.resolve(src, 'assets/icons/android-chrome-192x192.png'),
                     sizes: [192],
                     type: "image/png",
-                    purpose: "any maskable"
+                    purpose: "any"
                 },
                 {
                     src: path.resolve(src, 'assets/icons/apple-touch-icon.png'),
                     sizes: [180],
                     type: "image/png",
-                    purpose: "any maskable"
+                    purpose: "maskable"
                 },
                 {
                     src: path.resolve(src, 'assets/icons/favicon.ico'),
                     sizes: [48],
                     type: "image/x-icon",
-                    purpose: "any maskable"
+                    purpose: "maskable"
                 },
                 {
                     src: path.resolve(src, 'assets/icons/favicon-32x32.png'),
                     sizes: [32],
                     type: "image/png",
-                    purpose: "any maskable"
+                    purpose: "maskable"
                 },
                 {
                     src: path.resolve(src, 'assets/icons/favicon-16x16.png'),
                     sizes: [16],
                     type: "image/png",
-                    purpose: "any maskable"
+                    purpose: "maskable"
                 }
             ],
             screenshots: screenshots,
@@ -186,10 +186,10 @@ export default {
             meta: {
                 robots: { name: 'robots', content: 'index, follow' },
                 themeColor: { name: 'theme-color', content: '#ffffff' },
-                appleMobileWebAppCapable: { name: 'apple-mobile-web-app-capable', content: 'yes' },
-                appleMobileWebAppStatusBarStyle: { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-                msapplicationTileColor: { name: 'msapplication-TileColor', content: '#ffffff' },
-                msapplicationConfig: { name: 'msapplication-config', content: '/browserconfig.xml' }
+                // appleMobileWebAppCapable: { name: 'apple-mobile-web-app-capable', content: 'yes' },
+                // appleMobileWebAppStatusBarStyle: { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+                // msapplicationTileColor: { name: 'msapplication-TileColor', content: '#ffffff' },
+                // msapplicationConfig: { name: 'msapplication-config', content: '/browserconfig.xml' }
             },
             inject: 'body',
             domain: 'https://ebooks.sophat.top'

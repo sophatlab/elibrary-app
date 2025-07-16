@@ -12,8 +12,8 @@ export const imageSource = {
         const url = new URLSearchParams(options);
         return new URL(`${path}?${url.toString()}`, APP_API_URL).toString();
     },
-    srcset: (path) => {
-        const sizes = [50, 100, 200, 400, 800];
+    srcset: (path, options = []) => {
+        const sizes = [50, 100, 200 , ...options];
         return sizes.map(size => `${new URL(`${path}?q=10&w=${size}`, APP_API_URL).toString()} ${size}w`).join(', ');
     },
     error: new URL(`/api/v1/files/thumbnails/error.webp?q=60&w=512`, APP_API_URL).toString()

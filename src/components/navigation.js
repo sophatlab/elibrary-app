@@ -172,15 +172,18 @@ export class Navigation {
             // Check if this item should be active based on current URL
             const isActive = this.isUrlActive(item.url);
 
-            return (`
-                <li>
-                    <a class="${cn("group relative inline-flex w-full py-1 px-3 rounded-2xl justify-start items-center gap-3 font-medium hover:bg-primary/5 hover:text-primary", isActive ? "text-primary bg-primary/5 border border-primary/10 border-dashed" : "text-foreground/80")}"
-                        aria-current="${isActive ? 'page' : 'false'}"
-                        href="${new URL(item.url, window.location.origin)}">
-                        ${item.title}
-                    </a>
-                </li>
-            `)
+            return (`<li>
+                <a class="${cn(
+                    "group relative inline-flex w-full py-1 px-3 rounded-2xl justify-start items-center gap-3 font-medium hover:bg-primary/10 hover:text-primary",
+                    isActive
+                        ? "text-primary bg-primary-foreground/10 border border-primary/20 border-dashed"
+                        : "text-foreground"
+                )}"
+                    aria-current="${isActive ? 'page' : 'false'}"
+                    href="${new URL(item.url, window.location.origin)}">
+                    ${item.title}
+                </a>
+            </li>`)
         }).join('');
 
         container.innerHTML = sidebarContent;

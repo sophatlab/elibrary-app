@@ -61,7 +61,7 @@
         --card: 0 0% 98%;
         --card-foreground: 240 10% 3.9%;
 
-        --primary: 159 91% 30%;
+        --primary: 159 91% 26%;
         --primary-foreground: 159 100% 95%;
 
         --destructive: 0 84.2% 60.2%;
@@ -80,7 +80,7 @@
         --card-foreground: 240 10% 95%;
 
         --primary: 159 91% 30%;
-        --primary-foreground: 159 100% 95%;
+        --primary-foreground: 159 91% 1%;
 
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
