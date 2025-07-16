@@ -12,7 +12,7 @@
     ],
     "scripts": {
         "dev": "webpack serve --mode development",
-        "styles": "tailwindcss -i ./src/style/main.css -o ./dist/css/app.css --minify",
+        "styles": "npx @tailwindcss/cli -i ./src/style/main.css -o ./dist/css/app.css --minify",
         "image-min": "imagemin ./src/images/* --out-dir=./dist/images",
         "build": "webpack --mode production && npm run styles && npm run image-min && npm run filesize",
         "filesize": "npx size-limit",
