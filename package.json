@@ -39,6 +39,7 @@
         "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^7.1.2",
         "html-webpack-plugin": "^5.6.3",
+        "imagemin-cli": "^8.0.0",
         "mini-css-extract-plugin": "^2.9.2",
         "postcss-loader": "^8.1.1",
         "size-limit": "^11.2.0",
