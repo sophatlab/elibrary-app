@@ -91,10 +91,10 @@ export default {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'images/[name][ext]'
+                    filename: 'assets/images/[name][ext]'
                 }
             },
             {
@@ -102,13 +102,6 @@ export default {
                 type: 'asset/resource',
                 generator: {
                     filename: 'fonts/[name][ext]'
-                }
-            },
-            {
-                test: /\.(png|ico)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'assets/icons/[name][ext]'
                 }
             }
         ]
@@ -129,52 +122,24 @@ export default {
         new WebpackPwaManifest({
             publicPath: '/',
             name: APP_NAME,
-            short_name: APP_NAME,
+            short_name: "ebooks",
             description: APP_DESCRIPTION,
             start_url: "/",
             background_color: "#ffffff",
             theme_color: "#ffffff",
-            crossorigin: 'use-credentials',
             icons: [
                 {
                     src: path.resolve(src, 'assets/icons/android-chrome-512x512.png'),
-                    sizes: [512],
+                    sizes: [96, 128, 192, 256, 384, 512],
                     type: "image/png",
-                    purpose: "maskable"
+                    purpose: "maskable",
+                    destination: path.join('assets', 'icons'),
                 },
-                {
-                    src: path.resolve(src, 'assets/icons/android-chrome-192x192.png'),
-                    sizes: [192],
-                    type: "image/png",
-                    purpose: "any"
-                },
-                {
-                    src: path.resolve(src, 'assets/icons/apple-touch-icon.png'),
-                    sizes: [180],
-                    type: "image/png",
-                    purpose: "maskable"
-                },
-                {
-                    src: path.resolve(src, 'assets/icons/favicon.ico'),
-                    sizes: [48],
-                    type: "image/x-icon",
-                    purpose: "maskable"
-                },
-                {
-                    src: path.resolve(src, 'assets/icons/favicon-32x32.png'),
-                    sizes: [32],
-                    type: "image/png",
-                    purpose: "maskable"
-                },
-                {
-                    src: path.resolve(src, 'assets/icons/favicon-16x16.png'),
-                    sizes: [16],
-                    type: "image/png",
-                    purpose: "maskable"
-                }
             ],
             screenshots: screenshots,
-            filename: "site.webmanifest"
+            filename: "site.webmanifest",
+            inject: true,
+            fingerprints: true,
         })
 
     ].concat(
@@ -186,10 +151,6 @@ export default {
             meta: {
                 robots: { name: 'robots', content: 'index, follow' },
                 themeColor: { name: 'theme-color', content: '#ffffff' },
-                // appleMobileWebAppCapable: { name: 'apple-mobile-web-app-capable', content: 'yes' },
-                // appleMobileWebAppStatusBarStyle: { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-                // msapplicationTileColor: { name: 'msapplication-TileColor', content: '#ffffff' },
-                // msapplicationConfig: { name: 'msapplication-config', content: '/browserconfig.xml' }
             },
             inject: 'body',
             domain: 'https://ebooks.sophat.top'

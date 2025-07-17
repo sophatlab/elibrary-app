@@ -14,7 +14,7 @@
         "dev": "webpack serve --mode development",
         "styles": "npx @tailwindcss/cli -i ./src/style/main.css -o ./dist/css/app.css --minify",
         "image-min": "imagemin ./src/images/* --out-dir=./dist/images",
-        "build": "webpack --mode production && npm run styles && npm run image-min && npm run filesize",
+        "build": "webpack --mode production && npm run styles",
         "filesize": "npx size-limit",
         "start": "http-server ./dist -p 3000"
     },
