@@ -130,9 +130,16 @@ export default {
             icons: [
                 {
                     src: path.resolve(src, 'assets/icons/android-chrome-512x512.png'),
-                    sizes: [96, 128, 192, 256, 384, 512],
+                    sizes: [96, 128, 256, 384, 512],
                     type: "image/png",
                     purpose: "maskable",
+                    destination: path.join('assets', 'icons'),
+                },
+                {
+                    src: path.resolve(src, 'assets/icons/android-chrome-512x512.png'),
+                    sizes: [192],
+                    type: "image/png",
+                    purpose: "any",
                     destination: path.join('assets', 'icons'),
                 },
             ],
