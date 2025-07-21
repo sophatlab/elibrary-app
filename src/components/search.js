@@ -27,7 +27,7 @@ export class Search {
     createSearchDialog() {
         const dialog = document.createElement('div');
         dialog.id = 'search-dialog';
-        dialog.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-300 ease-in-out opacity-0';
+        dialog.className = 'fixed inset-0 z-[9999] hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-300 ease-in-out opacity-0';
         dialog.innerHTML = `
             <div class="search-dialog bg-background/80 border border-border rounded-xl shadow-lg w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 ease-in-out scale-95 translate-y-4">
                 <div class="flex items-center border-b border-border px-4">
